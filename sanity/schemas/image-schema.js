@@ -1,6 +1,6 @@
 const image = {
-  name: "imageGallery",
-  title: "ImageGallery",
+  name: "projects_gallery",
+  title: "Projects_Gallery",
   type: "document",
   fields: [
     {

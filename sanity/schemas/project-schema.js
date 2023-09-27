@@ -51,7 +51,7 @@ const projects = {
       name: "gallerys",
       title: "Gallerys",
       type: "reference",
-      to: { type: "imageGallery" },
+      to: { type: "projects_gallery" },
     },
   ],
 };

@@ -2,8 +2,7 @@
 import { defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
-import projectSchema from "./sanity/schemas/project-schema";
-import image from "./sanity/schemas/image-schema";
+import schemas from "./sanity/schemas";
 
 export default defineConfig({
   name: "photography",
@@ -13,6 +12,6 @@ export default defineConfig({
   apiVersion: "2023-09-26",
   plugins: [deskTool(), visionTool()],
   schema: {
-    types: [projectSchema, image],
+    types: schemas,
   },
 });

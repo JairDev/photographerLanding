@@ -1,0 +1,49 @@
+---
+import { useSanityClient } from "@sanity/astro";
+const client = useSanityClient();
+
+export async function getStaticPaths() {
+  const client = useSanityClient();
+  const projects = await client.fetch(`*[_type == "projects"]{
+      "slug": slug.current
+  }`);
+  return projects.map((project) => ({
+    params: {
+      slug: project.slug,
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const projectsContent = await client.fetch(
+  `*[_type == "projects" && slug.current == $slug][0]{
+  "slug": slug.current,
+  title,
+  "image": image.asset->url,
+  date,
+  gallerys->{
+    'images': image[]{
+      "url": asset->url,
+      imagename
+    }
+  }
+}`,
+  { slug }
+);
+// console.log(projectsContent.gallerys.images);
+---
+
+<div>
+  Este es el proyecto {slug}
+  <div>Name: {projectsContent.title}</div>
+  <div>Date: {projectsContent.date}</div>
+  {
+    projectsContent.gallerys.images.map((image) => (
+      <div>
+        <img src={image.url} />
+        <p>{image.imagename}</p>
+      </div>
+    ))
+  }
+</div>
