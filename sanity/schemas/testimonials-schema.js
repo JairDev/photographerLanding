@@ -13,7 +13,21 @@ const testimonials = {
       title: "Testimonial",
       type: "string",
     },
-    { name: "avatar", title: "Avatar", type: "image" },
+    {
+      name: "avatar",
+      title: "Avatar",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt",
+          type: "string",
+        },
+      ],
+    },
   ],
 };
 

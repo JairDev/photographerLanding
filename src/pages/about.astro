@@ -1,17 +1,18 @@
 ---
 import { useSanityClient } from "@sanity/astro";
-export function getStaticPaths() {
-  return [{ params: { slug: "about" } }];
-}
+// export function getStaticPaths() {
+//   return [{ params: { slug: "about" } }];
+// }
 
-const { slug } = Astro.params;
+// const { slug } = Astro.params;
 const client = useSanityClient();
 const user = await client.fetch(`*[_type == "about"][0]{
   admin_name,
   "avatar": avatar.asset->url
 }`);
+// console.log(slug);
 ---
 
-<h1>{slug}</h1>
+<!-- <h1>{slug}</h1> -->
 <div>{user.admin_name}</div>
 <img src={user.avatar} />

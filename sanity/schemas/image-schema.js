@@ -15,7 +15,17 @@ const image = {
       of: [
         {
           type: "image",
-          fields: [{ name: "imagename", title: "Imagenames", type: "string" }],
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            { name: "imagename", title: "Imagenames", type: "string" },
+            {
+              name: "alt",
+              title: "Alt",
+              type: "string",
+            },
+          ],
         },
       ],
     },
