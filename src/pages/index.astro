@@ -1,49 +1,76 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { PortableText } from "astro-portabletext";
 import { useSanityClient } from "@sanity/astro";
+
 const client = useSanityClient();
-const projects = await client.fetch(`*[_type == "projects"][0]{
+const projects = await client.fetch(`*[_type == "projects"]{
   title,
-  "image": image.asset->url
+  place,
+  date,
+  "image": image.asset->url,
+  "alt": image.alt
 }`);
 
-const pro = await client.fetch(`*[_type == "projects"]{
-  title,
-  "image": image.asset->url
+const about = await client.fetch(`*[_type == "about"][0]{
+  "avatar": avatar.asset->url,
+  "alt": avatar.alt
 }`);
 
-// console.log(projects);
+const services = await client.fetch(`*[_type == "services"]{
+  service,
+  description
+}`);
+
+const testimonials = await client.fetch(`*[_type == "testimonials"]{
+  name_client,
+  testimonial,
+  "avatar": avatar.asset->url,
+  "alt": avatar.alt
+}`);
 ---
 
 <Layout title="Andrea Fotografía">
   <div class="header">
-    <div class="jacob-gr-nberg">JACOB GRÖNBERG</div>
-    <img class="menu-toggle" src="img/menu-toggle.svg" />
+    <div class="jacob-gr-nberg">ANDREA MARTINEZ</div>
+    <img class="menu-toggle" src="../../src/assets/svg/menu_toggle.svg" />
   </div>
   <main>
     <section class="hero">
       <div class="overlap">
         <div class="overlap-group">
           <div class="headline">
-            <div class="jacob-gr-nberg">Jacob <br />Grønberg</div>
-            <div class="photographer">PHOTOGRAPHER</div>
-            <!-- <div class="visual-artist">&amp; VISUAL ARTIST</div> -->
+            <div class="jacob-gr-nberg">Andrea <br />Martinez</div>
+            <div class="photographer">FOTÓGRAFA</div>
+            <div class="visual-artist">&amp; ARTISTA VISUAL</div>
           </div>
           <div class="image-wrapper">
-            <img class="sergey-vinogradov" src={projects.image} />
+            <Image
+              src={projects[0].image}
+              alt={projects[0].alt}
+              width={400}
+              height={600}
+            />
           </div>
         </div>
         <div class="image">
           <div class="div">
             <div class="image-2">
-              <img class="image-client" src={projects.image} />
+              <!-- <img class="image-client" src={about.avatar} /> -->
+              <Image
+                src={about.avatar}
+                alt={about.alt}
+                width={200}
+                height={200}
+              />
             </div>
-            <div class="text-wrapper">Hi, Im Jacob</div>
+            <div class="text-wrapper">Hola, soy Andrea</div>
           </div>
           <div class="button">
             <div class="overlap-group-2">
               <div class="circle">
-                <div class="work-with-me">WORK<br />WITH ME</div>
+                <div class="work-with-me">TRABAJA<br />CONMIGO</div>
               </div>
               <div class="border"></div>
             </div>
@@ -61,76 +88,55 @@ const pro = await client.fetch(`*[_type == "projects"]{
     <section class="services">
       <div class="frame">
         <div class="rectangle"></div>
-        <div class="text-wrapper">Services</div>
+        <div class="text-wrapper">Servicios</div>
       </div>
       <div class="grid">
-        <div class="row">
-          <div class="grid-2">
-            <div class="text-wrapper-2">01</div>
-            <div class="text-wrapper-3">PHOTO SHOOTING</div>
-          </div>
-          <div class="div-wrapper">
-            <p class="p">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="row">
-          <div class="grid-2">
-            <div class="text-wrapper-2">02</div>
-            <div class="text-wrapper-3">VIDEO EDITING</div>
-          </div>
-          <div class="div-wrapper">
-            <p class="p">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="row">
-          <div class="grid-2">
-            <div class="text-wrapper-2">03</div>
-            <div class="text-wrapper-3">ART DIRECTION</div>
-          </div>
-          <div class="div-wrapper">
-            <p class="p">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
+        {
+          services.map((service, index) => (
+            <div class="row">
+              <div class="grid-2">
+                <div class="text-wrapper-2">{`0${index + 1}`}</div>
+                <div class="text-wrapper-3">{service.service}</div>
+              </div>
+              <div class="div-wrapper">
+                <PortableText value={service.description} />
+              </div>
+            </div>
+          ))
+        }
       </div>
     </section>
 
     <section class="latest-work">
       <div class="grid">
         <div class="title">
-          <div class="latest">LATEST</div>
-          <div class="text-wrapper">Work</div>
+          <div class="text-wrapper">TRABAJOS</div>
+          <div class="latest">Recientes</div>
         </div>
         <div class="button-text">
           <div class="arrow-right">View All</div>
-          <img class="icon" src="img/icon.png" />
+          <img class="icon" src="../../src/assets/svg/arrow-right.svg" />
         </div>
       </div>
       <div class="projects">
         {
-          pro.map((project) => (
+          projects.map((project) => (
             <div class="project">
               <div class="overlap-group-wrapper">
-                <div class="dancing-in-black">{project.title}</div>
+                <div class="project-title">{project.title}</div>
               </div>
               <div class="image-wrapper">
-                {" "}
-                <img src={project.image} />{" "}
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  width={400}
+                  height={600}
+                />
               </div>
-              <div class="new-york-october">
-                New York
+              <div class="wrapper-project-info">
+                {project.place}
                 <br />
-                October 2021
+                Septiembre 2023
               </div>
             </div>
           ))
@@ -143,90 +149,51 @@ const pro = await client.fetch(`*[_type == "projects"]{
         <div class="frame">
           <div class="title">
             <div class="overlap-group">
-              <div class="what-my-clients">WHAT MY <br />CLIENTS</div>
-              <div class="text-wrapper">Say</div>
+              <div class="what-my-clients">QUE DICEN MIS</div>
+              <div class="text-wrapper">CLIENTES</div>
             </div>
           </div>
           <p class="worked-with-over">
-            <span class="span">Worked with Over</span>
-            <span class="text-wrapper-2">50 clients <br /></span>
-            <span class="span">around the world</span>
+            <span class="span">He trabajado con mas de</span>
+            <span class="text-wrapper-2"> 50 CLIENTES</span>
+            <span class="span"> en todo el país</span>
           </p>
         </div>
         <button class="button">
           <div class="default">Work With Me</div>
-          <img class="icon" src="img/icon.png" />
+          <img class="icon" src="../../src/assets/svg/arrow-right.svg" />
         </button>
       </div>
       <div class="wrapper-testimonial">
         <div class="testimonial">
           <div class="image-wrapper"></div>
-          <div class="content">
-            <div class="grid-2">
-              <img class="image" src="img/image.svg" />
-              <p class="text-wrapper-3">I Really Enjoyed Working With Jacob</p>
-            </div>
-            <div class="grid-3">
-              <p class="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-                <br /><br />Enim lobortis scelerisque fermentum dui faucibus in
-                ornare quam viverra. Laoreet sit amet cursus sit amet dictum sit
-                amet justo.
-              </p>
-              <div class="subnav">
-                <div class="text-wrapper-4">Michelle Lindstrøm</div>
-                <div class="line"></div>
-                <div class="text-wrapper-4">Photoshoot</div>
+          {
+            testimonials.map((testimonial) => (
+              <div class="content">
+                <div class="grid-2">
+                  <div class="wrapper-comment-avatar">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={testimonial.alt}
+                      width={80}
+                      height={80}
+                    />
+                  </div>
+                  <img class="quote" src="../../src/assets/svg/comillas.svg" />
+                  <p class="text-wrapper-3">{testimonial.testimonial}</p>
+                </div>
+                <div class="grid-3">
+                  <div class="subnav">
+                    <div class="text-wrapper-4">{testimonial.name_client}</div>
+                    <div class="line" />
+                    <div class="text-wrapper-4">Photoshoot</div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            ))
+          }
         </div>
         <div class="line-2"></div>
-        <div class="testimonial">
-          <div class="image-wrapper-2"></div>
-          <div class="content">
-            <div class="grid-2">
-              <img class="image" src="img/image-2.svg" />
-              <p class="text-wrapper-3">I Really Enjoyed Working With Jacob</p>
-            </div>
-            <div class="grid-3">
-              <p class="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <div class="subnav">
-                <div class="text-wrapper-4">Jannis Jackson</div>
-                <div class="line"></div>
-                <div class="text-wrapper-4">Art Direction</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="line-2"></div>
-        <div class="testimonial">
-          <div class="image-wrapper-3"></div>
-          <div class="content-2">
-            <div class="grid-2">
-              <img class="image" src="img/image-3.svg" />
-              <p class="text-wrapper-3">I Really Enjoyed Working With Jacob</p>
-            </div>
-            <div class="grid-3">
-              <p class="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim
-                lobortis scelerisque fermentum dui faucibus in ornare quam
-                viverra.
-              </p>
-              <div class="subnav">
-                <div class="text-wrapper-4">Daniela Berg</div>
-                <div class="line"></div>
-                <div class="text-wrapper-4">Video Editing</div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -249,8 +216,8 @@ const pro = await client.fetch(`*[_type == "projects"]{
         <div class="line"></div>
         <div class="div">
           <div class="logo">
-            <div class="jacob-gr-nberg">Jacob <br />Grønberg</div>
-            <div class="photograph-visual">Photograph &amp; Visual Artist</div>
+            <div class="jacob-gr-nberg">Andrea <br />Martinez</div>
+            <div class="photograph-visual">Fotógrafa &amp; Artista Visual</div>
           </div>
           <div class="column">
             <div class="text-wrapper-2">MENU</div>
@@ -272,11 +239,11 @@ const pro = await client.fetch(`*[_type == "projects"]{
           </div>
         </div>
         <div class="footer-bottom">
-          <div class="column-2">
+          <!-- <div class="column-2">
             <p class="text-wrapper-5">© Made by Pawel Gola</p>
             <div class="line-2"></div>
             <div class="text-wrapper-5">Powered by Webflow</div>
-          </div>
+          </div> -->
           <div class="column-3">
             <div class="text-wrapper-6">TWITTER</div>
             <div class="text-wrapper-6">INSTAGRAM</div>
@@ -318,18 +285,13 @@ const pro = await client.fetch(`*[_type == "projects"]{
   }
 
   main {
-    /* border: 1px solid red; */
     margin: auto;
-    /* padding: 1rem; */
     max-width: 1400px;
     /* max-width: calc(100% - 2rem); */
-    /* color: white; */
     font-size: 20px;
     line-height: 1.6;
-    /* padding: 0rem 1rem; */
   }
   .astro-a {
-    /* position: absolute; */
     top: -32px;
     left: 50%;
     transform: translatex(-50%);
@@ -346,6 +308,8 @@ const pro = await client.fetch(`*[_type == "projects"]{
   }
   /* //////////7 */
   .hero {
+    /* border: 1px solid red; */
+    /* min-height: 100vh; */
   }
 
   .hero .hero {
@@ -388,15 +352,8 @@ const pro = await client.fetch(`*[_type == "projects"]{
   .hero .image-wrapper {
     display: flex;
     justify-content: flex-end;
-    /* width: 100%; */
-    /* position: absolute; */
-    /* width: 752px; */
-    /* height: 918px; */
     top: 0;
     left: 648px;
-    /* background-image: url(./img/sergey-vinogradov-nzkmqwm6rkq-unsplash-1.png); */
-    /* background-size: cover; */
-    /* background-position: 50% 50%; */
     z-index: 1;
   }
 
@@ -408,20 +365,12 @@ const pro = await client.fetch(`*[_type == "projects"]{
 
   .hero .headline {
     position: absolute;
-    /* width: 951px; */
-    /* height: 514px; */
     top: 77px;
     left: 0;
     z-index: 3;
   }
 
   .hero .jacob-gr-nberg {
-    /* position: absolute; */
-    /* width: 1400px;
-    height: 1006px;
-    width: 945px; */
-    top: 0;
-    left: 0;
     font-family: var(--heading-xlarge-font-family);
     font-weight: var(--heading-xlarge-font-weight);
     color: var(--textprimary);
@@ -432,12 +381,6 @@ const pro = await client.fetch(`*[_type == "projects"]{
   }
 
   .hero .photographer {
-    /* position: absolute; */
-    /* width: 490px; */
-    /* top: 371px; */
-    /* left: 180px; */
-    margin-top: 16px;
-    margin-left: 48px;
     font-family: var(--heading-uppercase-small-font-family);
     font-weight: var(--heading-uppercase-small-font-weight);
     color: var(--textdefault);
@@ -445,18 +388,28 @@ const pro = await client.fetch(`*[_type == "projects"]{
     letter-spacing: var(--heading-uppercase-small-letter-spacing);
     line-height: var(--heading-uppercase-small-line-height);
     font-style: var(--heading-uppercase-small-font-style);
+    margin-top: 16px;
+    margin-left: 24px;
+  }
+
+  .hero .visual-artist {
+    font-family: var(--heading-uppercase-small-font-family);
+    font-weight: var(--heading-uppercase-small-font-weight);
+    color: var(--textdefault);
+    font-size: var(--heading-uppercase-small-font-size);
+    letter-spacing: var(--heading-uppercase-small-letter-spacing);
+    line-height: var(--heading-uppercase-small-line-height);
+    font-style: var(--heading-uppercase-small-font-style);
+    margin-left: 48px;
   }
 
   .hero .image {
-    /* position: absolute; */
-    /* width: 319px;
-    height: 254px; */
+    /* border: 1px solid red; */
     display: flex;
     width: 100%;
     justify-content: space-between;
     margin-top: 2rem;
-    /* top: 742px;
-    left: 59px; */
+    position: relative;
   }
 
   .hero .image-2 {
@@ -464,9 +417,11 @@ const pro = await client.fetch(`*[_type == "projects"]{
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-    /* position: absolute; */
-    top: 0;
-    left: 0;
+  }
+
+  .hero .image-2 img {
+    /* border: 2px solid red; */
+    object-fit: cover;
   }
 
   .hero .image-client {
@@ -490,17 +445,15 @@ const pro = await client.fetch(`*[_type == "projects"]{
   }
 
   .hero .button {
-    /* position: absolute; */
-    /* width: 170px;
-    height: 160px; */
-    /* top: 94px;
-    left: 149px; */
+    /* border: 1px solid blue; */
     align-self: flex-end;
+    position: absolute;
+    right: 20px;
+    bottom: -20px;
   }
 
   .hero .overlap-group-2 {
     position: relative;
-    /* height: 160px; */
   }
 
   .hero .circle {
@@ -530,7 +483,6 @@ const pro = await client.fetch(`*[_type == "projects"]{
   }
 
   .hero .border {
-    /* position: absolute; */
     width: 160px;
     height: 160px;
     top: 0;
@@ -542,8 +494,22 @@ const pro = await client.fetch(`*[_type == "projects"]{
 
   /* services */
   .services {
-    margin-top: 2rem;
+    margin-top: 8rem;
   }
+  .services .text-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .services .text-wrapper::before {
+    /* border: 1px solid red; */
+    content: "";
+    display: block;
+    background-color: var(--textdefault);
+    width: 30px;
+    height: 2px;
+  }
+
   .services .grid {
     margin-top: 1rem;
   }
@@ -554,6 +520,16 @@ const pro = await client.fetch(`*[_type == "projects"]{
   .row .grid-2 {
     /* border: 2px solid red; */
     margin-bottom: 1rem;
+  }
+
+  .services .div-wrapper {
+    font-family: var(--text-medium-font-family);
+    font-weight: var(--text-medium-font-weight);
+    color: var(--textdefault);
+    font-size: var(--text-medium-font-size);
+    letter-spacing: var(--text-medium-letter-spacing);
+    line-height: var(--text-medium-line-height);
+    font-style: var(--text-medium-font-style);
   }
   .text-wrapper-2 {
     position: relative;
@@ -574,18 +550,19 @@ const pro = await client.fetch(`*[_type == "projects"]{
     letter-spacing: var(--heading-uppercase-h3-letter-spacing);
     line-height: var(--heading-uppercase-h3-line-height);
     font-style: var(--heading-uppercase-h3-font-style);
+    text-transform: uppercase;
     word-break: break-all;
     word-wrap: break-word;
+    margin-top: 0.5rem;
   }
 
   /* latest work */
 
   .latest-work {
-    margin-top: 2rem;
+    /* border: 1px solid red; */
+    margin-top: 8rem;
   }
-  .projects {
-    margin-top: 1rem;
-  }
+
   .latest-work .latest {
     position: relative;
     font-family: var(--heading-uppercase-large-font-family);
@@ -616,12 +593,35 @@ const pro = await client.fetch(`*[_type == "projects"]{
     /* border: 3px solid blue; */
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+
+  .projects .project-title {
+    /* border: 3px solid blue; */
+    font-family: var(--heading-uppercase-h3-font-family);
+    font-weight: var(--heading-uppercase-h3-font-weight);
+    color: var(--textprimary);
+    font-size: var(--heading-uppercase-h3-font-size);
+    letter-spacing: var(--heading-uppercase-h3-letter-spacing);
+    line-height: var(--heading-uppercase-h3-line-height);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .wrapper-project-info {
+    font-family: var(--text-default-font-family);
+    font-weight: var(--text-default-font-weight);
+    color: var(--textdefault);
+    font-size: var(--text-default-font-size);
+    letter-spacing: var(--text-default-letter-spacing);
+    line-height: var(--text-default-line-height);
+    font-style: var(--text-default-font-style);
   }
 
   /* clients */
   .clients {
-    margin-top: 2rem;
+    margin-top: 8rem;
   }
   .what-my-clients {
     font-family: var(--heading-uppercase-medium-font-family);
@@ -643,15 +643,87 @@ const pro = await client.fetch(`*[_type == "projects"]{
     font-style: var(--heading-medium-font-style);
   }
   .worked-with-over {
+    /* border: 1px solid red; */
     margin-top: 1rem;
   }
+
+  .label {
+    width: 480px;
+    height: 72px;
+  }
+
+  .clients .worked-with-over {
+    font-family: var(--heading-uppercase-h3-font-family);
+    font-weight: var(--heading-uppercase-h3-font-weight);
+    color: transparent;
+    font-size: var(--heading-uppercase-h3-font-size);
+    letter-spacing: var(--heading-uppercase-h3-letter-spacing);
+    line-height: var(--heading-uppercase-h3-line-height);
+    font-style: var(--heading-uppercase-h3-font-style);
+  }
+
+  .clients .span {
+    color: var(--textdefault);
+    font-family: var(--heading-uppercase-h3-font-family);
+    font-style: var(--heading-uppercase-h3-font-style);
+    font-weight: var(--heading-uppercase-h3-font-weight);
+    letter-spacing: var(--heading-uppercase-h3-letter-spacing);
+    line-height: var(--heading-uppercase-h3-line-height);
+    font-size: var(--heading-uppercase-h3-font-size);
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+
+  .clients .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 20px;
+    position: relative;
+    border-radius: 100px;
+    border: 1px solid var(--borderprimary);
+    margin-top: 3rem;
+  }
+  .clients .button .default {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: var(--button-default-font-family);
+    font-weight: var(--button-default-font-weight);
+    color: var(--textprimary);
+    font-size: var(--button-default-font-size);
+    letter-spacing: var(--button-default-letter-spacing);
+    line-height: var(--button-default-line-height);
+    white-space: nowrap;
+    font-style: var(--button-default-font-style);
+  }
+  .clients .button .icon {
+    position: relative;
+    width: 31.21px;
+    height: 14.71px;
+    margin-right: -0.71px;
+  }
+
+  .wrapper-comment-avatar {
+    margin: 3rem 0rem 2rem;
+  }
+  .wrapper-comment-avatar img {
+    object-fit: cover;
+  }
   .wrapper-testimonial {
+    /* border: 1px solid red; */
     margin-top: 2rem;
+  }
+
+  .testimonial .quote {
+    width: 48px;
+    height: 48px;
   }
 
   .testimonial:not(.testimonial:first-child) {
     /* border: 1px solid red; */
-    margin-top: 1rem;
+    margin-top: 3rem;
   }
 
   /* footer */
@@ -661,16 +733,18 @@ const pro = await client.fetch(`*[_type == "projects"]{
     align-items: center;
     justify-content: center;
     gap: 69px;
-    padding: 224px 0px;
+    padding: 8rem 0px;
     position: relative;
     flex: 0 0 auto;
   }
   .bottom .cta-button {
+    /* border: 1px solid blue; */
     position: relative;
     width: 220px;
     height: 220px;
   }
   .bottom .overlap-group {
+    /* border: 1px solid red; */
     position: relative;
     width: 230px;
     height: 220px;
@@ -737,15 +811,12 @@ const pro = await client.fetch(`*[_type == "projects"]{
   }
 
   .bottom .footer {
+    /* border: 1px solid red; */
     flex-direction: column;
-    /* width: 1400px; */
-    /* gap: 94px; */
-    /* padding: 0px 0px 48px; */
     background-color: transparent;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     position: relative;
-    /* flex: 0 0 auto; */
   }
   .bottom .line {
     /* width: 1417.72px; */
@@ -756,23 +827,15 @@ const pro = await client.fetch(`*[_type == "projects"]{
     height: 1px;
   }
   .bottom .div {
-    /* gap: 299px; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     position: relative;
-    /* flex: 0 0 auto; */
   }
   .bottom .logo {
     position: relative;
-    /* width: 481.97px; */
-    /* height: 219px; */
   }
   .bottom .jacob-gr-nberg {
-    /* position: absolute; */
-    /* width: 478px; */
-    top: 0;
-    left: 0;
     font-family: "Clash Display-Regular", Helvetica;
     font-weight: 400;
     color: var(--textprimary);
@@ -781,8 +844,6 @@ const pro = await client.fetch(`*[_type == "projects"]{
     line-height: 90px;
   }
   .bottom .photograph-visual {
-    /* position: absolute; */
-    /* width: 251px; */
     top: 190px;
     left: 81px;
     font-family: var(--text-medium-font-family);
@@ -797,14 +858,12 @@ const pro = await client.fetch(`*[_type == "projects"]{
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
-    /* gap: 50px; */
     position: relative;
     flex: 0 0 auto;
     margin-top: 2rem;
   }
   .bottom .text-wrapper-2 {
     position: relative;
-    /* width: fit-content; */
     margin-top: -1px;
     font-family: var(--heading-uppercase-h3-font-family);
     font-weight: var(--heading-uppercase-h3-font-weight);
@@ -812,7 +871,6 @@ const pro = await client.fetch(`*[_type == "projects"]{
     font-size: var(--heading-uppercase-h3-font-size);
     letter-spacing: var(--heading-uppercase-h3-letter-spacing);
     line-height: var(--heading-uppercase-h3-line-height);
-    white-space: nowrap;
     font-style: var(--heading-uppercase-h3-font-style);
   }
   .bottom .nav {
@@ -824,22 +882,18 @@ const pro = await client.fetch(`*[_type == "projects"]{
     align-self: stretch;
     width: 100%;
     flex: 0 0 auto;
+    margin-top: 0.5rem;
   }
   .bottom .text-wrapper-3 {
-    /* margin-top: -1px; */
-    position: relative;
-    width: fit-content;
     font-family: var(--text-medium-font-family);
     font-weight: var(--text-medium-font-weight);
     color: var(--textdefault);
     font-size: var(--text-medium-font-size);
     letter-spacing: var(--text-medium-letter-spacing);
     line-height: var(--text-medium-line-height);
-    white-space: nowrap;
     font-style: var(--text-medium-font-style);
   }
   .bottom .text-wrapper-4 {
-    position: relative;
     /* width: fit-content; */
     font-family: var(--text-medium-font-family);
     font-weight: var(--text-medium-font-weight);
@@ -847,7 +901,6 @@ const pro = await client.fetch(`*[_type == "projects"]{
     font-size: var(--text-medium-font-size);
     letter-spacing: var(--text-medium-letter-spacing);
     line-height: var(--text-medium-line-height);
-    white-space: nowrap;
     font-style: var(--text-medium-font-style);
   }
   .bottom .footer-bottom {
