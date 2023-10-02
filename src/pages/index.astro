@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
 import { Image } from "astro:assets";
 import { PortableText } from "astro-portabletext";
 import { useSanityClient } from "@sanity/astro";
@@ -32,10 +33,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 ---
 
 <Layout title="Andrea Fotografía">
-  <div class="header">
-    <div class="jacob-gr-nberg">ANDREA MARTINEZ</div>
-    <img class="menu-toggle" src="../../src/assets/svg/menu_toggle.svg" />
-  </div>
+  <Header />
   <main class="container">
     <section class="hero">
       <div class="overlap">
@@ -283,7 +281,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .container {
-    padding: 0rem 1rem;
+    padding: 5rem 1rem 0rem;
   }
 
   main {
@@ -312,11 +310,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .hero {
     /* border: 1px solid red; */
     /* max-height: 100vh; */
-  }
-
-  .hero .hero {
-    top: 0;
-    left: 0;
   }
 
   .hero .overlap {
@@ -363,6 +356,8 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     justify-content: flex-end; */
     /* width: 700px;
     height: 900px; */
+    /* padding-top: 2rem; */
+    padding-top: 6rem;
     z-index: 1;
   }
 
@@ -1125,8 +1120,12 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     .container {
       padding: 0rem 3rem;
     }
+
+    .hero .headline {
+      top: 160px;
+    }
     .hero .image-wrapper {
-      padding-top: 4rem;
+      /* padding-top: 6rem; */
       width: 700px;
       height: 900px;
     }
