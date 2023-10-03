@@ -34,7 +34,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 ---
 
 <Layout title="Andrea Fotografía">
-  <main class="container">
+  <main class="main">
     <section class="hero">
       <div class="overlap">
         <div class="overlap-group">
@@ -113,10 +113,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
           <div class="text-wrapper">TRABAJOS</div>
           <div class="latest">Recientes</div>
         </div>
-        <div class="button-text">
+        <!-- <div class="button-text">
           <div class="arrow-right">Ver Todos</div>
           <img class="icon" src="../../src/assets/svg/arrow-right.svg" />
-        </div>
+        </div> -->
       </div>
       <div class="projects">
         {
@@ -263,7 +263,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
   .hero .overlap {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     align-items: flex-end;
     min-height: 100vh;
     position: relative;
@@ -298,12 +298,13 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .image-wrapper {
-    padding-top: 6rem;
+    /* display: none; */
+    padding-top: 2rem;
     z-index: 1;
   }
 
   .hero .image-wrapper img {
-    opacity: 0;
+    opacity: 1;
   }
 
   .image-wrapper img {
@@ -314,9 +315,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .headline {
-    position: absolute;
+    /* position: absolute; */
     top: 77px;
     left: 0;
+    text-align: center;
     z-index: 3;
   }
 
@@ -338,7 +340,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     letter-spacing: var(--heading-uppercase-small-letter-spacing);
     line-height: var(--heading-uppercase-small-line-height);
     font-style: var(--heading-uppercase-small-font-style);
-    margin-left: 24px;
+    /* margin-left: 24px; */
     position: relative;
   }
 
@@ -367,14 +369,14 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     letter-spacing: var(--heading-uppercase-small-letter-spacing);
     line-height: var(--heading-uppercase-small-line-height);
     font-style: var(--heading-uppercase-small-font-style);
-    margin-left: 48px;
+    /* margin-left: 48px; */
     position: relative;
   }
 
   .hero .image {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 2rem;
     position: relative;
   }
@@ -397,6 +399,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     object-fit: cover;
   }
 
+  .image .div {
+    display: none;
+  }
+
   .hero .text-wrapper {
     position: relative;
     width: fit-content;
@@ -413,7 +419,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .hero .button {
     align-self: flex-end;
     position: absolute;
-    left: 160px;
+    /* left: 160px; */
     bottom: -20px;
   }
 
@@ -461,8 +467,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .services {
     display: flex;
     flex-direction: column;
-
-    margin-top: 14rem;
+    margin-top: 8rem;
   }
   .services .text-wrapper {
     display: flex;
@@ -491,7 +496,8 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
   .services .row {
     display: flex;
-    gap: 4rem;
+    flex-direction: column;
+    gap: 1rem;
   }
   .row:not(.row:first-child) {
     margin-top: 5rem;
@@ -533,7 +539,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   /* latest work */
 
   .latest-work {
-    margin-top: 14rem;
+    margin-top: 8rem;
   }
 
   .latest-work .latest {
@@ -560,7 +566,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
   .latest-work .grid {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 1rem;
     justify-content: space-between;
   }
@@ -570,6 +576,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     gap: 0.5rem;
   }
   .button-text .arrow-right {
+    display: none;
     font-family: var(--button-text-default-font-family);
     font-weight: var(--button-text-default-font-weight);
     color: var(--textdefault);
@@ -588,7 +595,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .latest-work .projects {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 6rem;
     margin-top: 4rem;
   }
 
@@ -600,7 +607,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     letter-spacing: var(--heading-uppercase-h3-letter-spacing);
     line-height: var(--heading-uppercase-h3-line-height);
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
   .wrapper-project-info {
@@ -657,7 +664,8 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .clients .grid-3 {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
+    font-size: 16px;
   }
 
   .clients .grid-3 .subnav {
@@ -736,9 +744,11 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .wrapper-comment-avatar {
-    margin: 5rem 0rem 2rem;
+    margin: 4rem 0rem 2rem;
   }
   .wrapper-comment-avatar img {
+    width: 120px;
+    height: 120px;
     object-fit: cover;
   }
   .wrapper-testimonial {
@@ -747,7 +757,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
   .wrapper-title-quote {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .testimonial .quote {
@@ -773,6 +783,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     margin-bottom: 14rem;
     position: relative;
     flex: 0 0 auto;
+  }
+
+  .bottom .grid {
+    text-align: center;
   }
   .bottom .cta-button {
     position: relative;
@@ -889,7 +903,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     align-items: flex-start;
     position: relative;
     flex: 0 0 auto;
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
   .bottom .text-wrapper-2 {
     position: relative;
@@ -1003,27 +1017,72 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     .services .grid {
       margin-top: 0rem;
     }
+    .button-text .arrow-right {
+      display: block;
+    }
+
+    .clients .grid-2 {
+      gap: 3rem;
+      flex-direction: row;
+    }
+    .wrapper-comment-avatar {
+      margin: 0;
+    }
+    .testimonial .content {
+      margin-top: 5rem;
+    }
   }
 
   @media screen and (min-width: 1200px) {
     .header {
       padding: 1rem 2.5rem;
     }
-    .container {
-      padding: 0rem 3rem;
+    .hero .headline {
+      text-align: initial;
+      position: absolute;
+      top: 160px;
     }
 
-    .hero .headline {
-      top: 160px;
+    .hero .visual-artist {
+      margin-left: 3rem;
     }
     .hero .image-wrapper {
       width: 700px;
       height: 900px;
     }
 
+    .hero .image {
+      position: absolute;
+      bottom: -120px;
+      justify-content: initial;
+    }
+
+    .hero .button {
+      position: relative;
+      margin-left: -3rem;
+    }
+
+    .hero .overlap {
+      flex-direction: row-reverse;
+    }
+
+    .services {
+      margin-top: 14rem;
+    }
+
+    .services .row {
+      flex-direction: row;
+      gap: 4rem;
+    }
+
+    .image .div {
+      display: block;
+    }
+
     .before-layer {
       margin-left: 7rem;
     }
+
     .latest-work .grid {
       flex-direction: row;
       justify-content: space-between;
@@ -1084,15 +1143,13 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       margin: 0;
     }
 
+    .testimonial .content {
+      margin-top: 0rem;
+    }
+
     .wrapper-comment-avatar {
       margin: 0;
     }
-
-    .clients .grid-2 {
-      gap: 2rem;
-      flex-direction: row;
-    }
-
     .bottom .cta {
       flex-direction: column-reverse;
       flex-direction: row;
@@ -1104,9 +1161,12 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     }
   }
 
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     .container {
       padding: 0rem 5rem;
+    }
+    .hero .jacob-gr-nberg {
+      font-size: 13rem;
     }
   }
 </style>

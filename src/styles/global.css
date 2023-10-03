@@ -15,13 +15,13 @@
   --iconinverse: rgba(255, 255, 255, 1);
   --heading-xlarge-font-family: "ClashDisplay-Regular", Helvetica;
   --heading-xlarge-font-weight: 400;
-  --heading-xlarge-font-size: clamp(80px, 10vw, 200px);
+  --heading-xlarge-font-size: 15vw;
   --heading-xlarge-letter-spacing: 0px;
   --heading-xlarge-line-height: 89.99999761581421%;
   --heading-xlarge-font-style: normal;
   --heading-large-font-family: "ClashDisplay-Regular", Helvetica;
   --heading-large-font-weight: 400;
-  --heading-large-font-size: clamp(56px, 10vw, 100px);
+  --heading-large-font-size: clamp(48px, 10vw, 100px);
   --heading-large-letter-spacing: 0px;
   --heading-large-line-height: 100%;
   --heading-large-font-style: normal;
@@ -51,7 +51,7 @@
   --heading-h2-font-style: normal;
   --heading-h3-font-family: "ClashDisplay-Regular", Helvetica;
   --heading-h3-font-weight: 400;
-  --heading-h3-font-size: 30px;
+  --heading-h3-font-size: 20px;
   --heading-h3-letter-spacing: 0px;
   --heading-h3-line-height: 120.00000476837158%;
   --heading-h3-font-style: normal;
@@ -75,7 +75,7 @@
   --heading-h6-font-style: normal;
   --heading-large-primary-font-family: "ClashDisplay-Regular", Helvetica;
   --heading-large-primary-font-weight: 400;
-  --heading-large-primary-font-size: clamp(48px, 7vw, 100px);
+  --heading-large-primary-font-size: clamp(40px, 7vw, 100px);
   --heading-large-primary-letter-spacing: 0px;
   --heading-large-primary-line-height: 110.00000238418579%;
   --heading-large-primary-font-style: normal;
@@ -111,7 +111,7 @@
   --heading-uppercase-h2-font-style: normal;
   --heading-uppercase-h3-font-family: "ClashDisplay-Regular", Helvetica;
   --heading-uppercase-h3-font-weight: 400;
-  --heading-uppercase-h3-font-size: clamp(18px, 5vw, 30px);
+  --heading-uppercase-h3-font-size: clamp(24px, 5vw, 30px);
   --heading-uppercase-h3-letter-spacing: 0px;
   --heading-uppercase-h3-line-height: 120.00000476837158%;
   --heading-uppercase-h3-font-style: normal;

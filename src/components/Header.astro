@@ -9,10 +9,10 @@
         <div class="jacob-gr-nberg"><a href="/">ANDREA MARTINEZ</a></div>
         <div class="menu-toggle">
           <img class="menu-off" src="../../src/assets/svg/menu_toggle.svg" />
-          <!-- <div class="overlap-group">
+          <div class="overlap-group">
             <div class="line"></div>
             <div class="line-2"></div>
-          </div> -->
+          </div>
         </div>
       </div>
       <ul class="div-2">
@@ -41,20 +41,44 @@
     </nav>
   </div>
 </div>
+<script>
+  // const menu = document.querySelector(".menu");
+  // const toggleMenu = document.querySelector(".menu-toggle");
+  // const defaultMenu = document.querySelector(".menu-off");
+  // const closeMenu = document.querySelector(".overlap-group");
+  // toggleMenu.addEventListener("click", function (e) {
+  //   e.preventDefault();
+  //   // defaultMenu.classList.toggle("hidden");
+  //   // closeMenu.classList.toggle("show");
+  //   console.log(menu);
+  // });
+</script>
 
 <style>
   a {
     text-decoration: none;
   }
   .menu {
-    background-color: var(--backgrounddefault);
+    /* background-color: var(--backgrounddefault); */
     display: flex;
     flex-direction: row;
     justify-content: center;
     position: fixed;
     width: 100%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     z-index: 10;
+  }
+
+  .menu::before {
+    content: "";
+    background: var(--backgrounddefault);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
   }
 
   .wrapper-header-nav {
@@ -90,13 +114,15 @@
   }
 
   .menu .div-2 {
+    border: 1px solid red;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
     width: 100%;
     padding-top: 2rem;
-    opacity: 1;
+    opacity: 0;
+    display: none;
   }
 
   .menu .menu-item {
@@ -164,14 +190,22 @@
     height: 36px;
     top: 82px;
     left: 82px;
+    opacity: 1;
+  }
+  .menu-off.hidden {
+    opacity: 0;
   }
 
-  .menu .overlap-group {
+  .overlap-group {
     position: relative;
     width: 36px;
     height: 36px;
     top: 82px;
     left: 82px;
+    opacity: 0;
+  }
+  .overlap-group.show {
+    opacity: 1;
   }
 
   .menu .line {

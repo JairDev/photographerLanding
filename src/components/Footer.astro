@@ -173,7 +173,7 @@
     align-items: flex-start;
     position: relative;
     flex: 0 0 auto;
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
   .bottom .text-wrapper-2 {
     position: relative;
@@ -195,7 +195,7 @@
     align-self: stretch;
     width: 100%;
     flex: 0 0 auto;
-    margin-top: 0.5rem;
+    margin-top: 2rem;
   }
   .bottom .text-wrapper-3 {
     font-family: var(--text-medium-font-family);
@@ -223,7 +223,7 @@
     align-items: center;
     position: relative;
     flex: 0 0 auto;
-    padding: 6rem 0rem 1rem;
+    padding: 6rem 0rem 4rem;
   }
   .bottom .column-2 {
     display: inline-flex;
@@ -272,15 +272,19 @@
     font-style: var(--heading-h6-font-style);
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 768px) {
     .bottom .cta {
       flex-direction: column-reverse;
       flex-direction: row;
     }
-
     .bottom .div {
       flex-direction: row;
       gap: 10rem;
+    }
+  }
+  @media screen and (min-width: 1440px) {
+    .bottom .jacob-gr-nberg {
+      font-size: 7rem;
     }
   }
 </style>
