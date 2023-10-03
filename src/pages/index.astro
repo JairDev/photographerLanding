@@ -206,48 +206,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
         <div class="line-2"></div>
       </div>
     </section>
-
-    <!-- <section class="bottom">
-      <div class="cta">
-        <div class="cta-button">
-          <div class="overlap-group">
-            <div class="circle">
-              <div class="get-in-touch">PONTE EN CONTACTO</div>
-            </div>
-            <div class="border"></div>
-          </div>
-        </div>
-        <div class="grid">
-          <div class="let-s-work">TRABAJEMOS</div>
-          <div class="text-wrapper">Juntos</div>
-        </div>
-      </div>
-      <footer class="footer">
-        <div class="line"></div>
-        <div class="div">
-          <div class="logo">
-            <div class="jacob-gr-nberg">Andrea <br />Martinez</div>
-            <div class="photograph-visual">Fotógrafa &amp; Artista Visual</div>
-          </div>
-          <div class="column">
-            <div class="text-wrapper-2">MENU</div>
-            <div class="nav">
-              <div class="text-wrapper-4">INICIO</div>
-              <div class="text-wrapper-4">Proyectos</div>
-              <div class="text-wrapper-4">Acerca de</div>
-              <div class="text-wrapper-4">Contacto</div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="column-3">
-            <div class="text-wrapper-6">TWITTER</div>
-            <div class="text-wrapper-6">INSTAGRAM</div>
-            <div class="text-wrapper-6">FACEBOOK</div>
-          </div>
-        </div>
-      </footer>
-    </section> -->
   </main>
 </Layout>
 
@@ -278,17 +236,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     position: relative;
     width: 48px;
   }
-
-  /* .container {
-    padding: 5rem 1rem 0rem;
-  } */
-
   main {
     margin: auto;
     max-width: 1400px;
-    /* max-width: calc(100% - 2rem); */
     font-size: 20px;
-    /* line-height: 1.6; */
   }
   .astro-a {
     top: -32px;
@@ -306,18 +257,12 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     margin-bottom: 1em;
   }
   /* //////////7 */
-  .hero {
-    /* border: 1px solid red; */
-    /* max-height: 100vh; */
-  }
 
   .hero .overlap {
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-end;
     min-height: 100vh;
-    /* gap: 8rem; */
     position: relative;
   }
 
@@ -350,12 +295,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .image-wrapper {
-    /* border: 1px solid blue; */
-    /* display: flex;
-    justify-content: flex-end; */
-    /* width: 700px;
-    height: 900px; */
-    /* padding-top: 2rem; */
     padding-top: 6rem;
     z-index: 1;
   }
@@ -369,7 +308,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     height: 100%;
     object-fit: cover;
     filter: grayscale(100);
-    /* opacity: 0; */
   }
 
   .hero .headline {
@@ -397,13 +335,11 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     letter-spacing: var(--heading-uppercase-small-letter-spacing);
     line-height: var(--heading-uppercase-small-line-height);
     font-style: var(--heading-uppercase-small-font-style);
-    /* margin-top: 16px; */
     margin-left: 24px;
     position: relative;
   }
 
   .before-layer {
-    /* border: 1px solid red; */
     position: relative;
     margin-top: 16px;
     padding: 0.5rem 0rem;
@@ -419,10 +355,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     height: 100%;
     /* z-index: 1; */
   }
-  .hero .photographer div {
-    /* position: relative; */
-    /* z-index: 4; */
-  }
 
   .hero .visual-artist {
     font-family: var(--heading-uppercase-small-font-family);
@@ -437,7 +369,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .image {
-    /* border: 1px solid red; */
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -453,7 +384,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .image-2 img {
-    /* border: 2px solid red; */
     object-fit: cover;
   }
 
@@ -478,7 +408,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .button {
-    /* border: 1px solid blue; */
     align-self: flex-end;
     position: absolute;
     left: 160px;
@@ -546,7 +475,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     font-style: var(--text-default-font-style);
   }
   .services .text-wrapper::before {
-    /* border: 1px solid red; */
     content: "";
     display: block;
     background-color: var(--textdefault);
@@ -563,14 +491,8 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     gap: 4rem;
   }
   .row:not(.row:first-child) {
-    /* border: 2px solid red; */
     margin-top: 5rem;
   }
-  .row .grid-2 {
-    /* border: 2px solid red; */
-    /* margin-bottom: 1rem; */
-  }
-
   .services .div-wrapper {
     font-family: var(--text-medium-font-family);
     font-weight: var(--text-medium-font-weight);
@@ -608,7 +530,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   /* latest work */
 
   .latest-work {
-    /* border: 1px solid red; */
     margin-top: 14rem;
   }
 
@@ -624,7 +545,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     font-style: var(--heading-uppercase-large-font-style);
   }
   .latest-work .text-wrapper {
-    /* border: 1px solid red; */
     position: relative;
     font-family: var(--heading-large-primary-font-family);
     font-weight: var(--heading-large-primary-font-weight);
@@ -636,18 +556,14 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     font-style: var(--heading-large-primary-font-style);
   }
   .latest-work .grid {
-    /* border: 1px solid red; */
     display: flex;
-    /* align-items: center; */
     flex-direction: column;
     gap: 1rem;
     justify-content: space-between;
   }
   .button-text {
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
-    /* align-self: flex-start; */
     gap: 0.5rem;
   }
   .button-text .arrow-right {
@@ -662,14 +578,11 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .button-text .icon {
-    /* border: 1px solid red; */
     position: relative;
     width: 31.21px;
     height: 14.71px;
-    /* margin-right: -0.71px; */
   }
   .latest-work .projects {
-    /* border: 3px solid blue; */
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -677,7 +590,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .projects .project-title {
-    /* border: 3px solid blue; */
     font-family: var(--heading-uppercase-h3-font-family);
     font-weight: var(--heading-uppercase-h3-font-weight);
     color: var(--textprimary);
@@ -725,8 +637,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .clients .text-wrapper-3 {
-    /* border: 1px solid red; */
-    /* width: min-content; */
     font-family: var(--heading-h3-font-family);
     font-weight: var(--heading-h3-font-weight);
     color: var(--textdefault);
@@ -735,24 +645,19 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     line-height: var(--heading-h3-line-height);
     font-style: var(--heading-h3-font-style);
     text-transform: capitalize;
-    /* word-wrap: break-word; */
     word-break: break-word;
   }
 
   .clients .grid-2 {
-    /* border: 1px solid red; */
     display: flex;
-    /* gap: 2rem; */
     flex-direction: column;
   }
 
   .clients .grid-3 {
-    /* border: 1px solid red; */
     margin-top: 3rem;
   }
 
   .clients .grid-3 .subnav {
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -828,14 +733,12 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .wrapper-comment-avatar {
-    /* border: 1px solid red; */
     margin: 5rem 0rem 2rem;
   }
   .wrapper-comment-avatar img {
     object-fit: cover;
   }
   .wrapper-testimonial {
-    /* border: 1px solid red; */
     margin-top: 2rem;
   }
 
@@ -850,7 +753,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .testimonial:not(.testimonial:first-child) {
-    /* border: 1px solid red; */
     margin-top: 3rem;
   }
 
@@ -870,13 +772,11 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     flex: 0 0 auto;
   }
   .bottom .cta-button {
-    /* border: 1px solid blue; */
     position: relative;
     width: 220px;
     height: 220px;
   }
   .bottom .overlap-group {
-    /* border: 1px solid red; */
     position: relative;
     width: 230px;
     height: 220px;
@@ -943,17 +843,12 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .bottom .footer {
-    /* border: 1px solid red; */
     flex-direction: column;
     background-color: transparent;
     display: flex;
-    /* align-items: center; */
     position: relative;
   }
   .bottom .line {
-    /* width: 1417.72px; */
-    /* margin-left: -8.86px; */
-    /* margin-right: -8.86px; */
     background-color: var(--borderdefault);
     position: relative;
     height: 1px;
@@ -974,7 +869,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     color: var(--textprimary);
     font-size: var(--heading-xlarge-font-size);
     letter-spacing: 0;
-    /* line-height: 90px; */
   }
   .bottom .photograph-visual {
     font-family: var(--text-medium-font-family);
@@ -1027,7 +921,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     margin: 0;
   }
   .bottom .text-wrapper-4 {
-    /* width: fit-content; */
     font-family: var(--text-medium-font-family);
     font-weight: var(--text-medium-font-weight);
     color: var(--textdefault);
@@ -1100,12 +993,9 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       opacity: 1;
     }
     .services {
-      /* border: 1px solid red; */
-      /* display: flex; */
       gap: 8rem;
       flex-direction: row;
       padding-left: 10rem;
-      /* justify-content: space-evenly; */
     }
     .services .grid {
       margin-top: 0rem;
@@ -1124,7 +1014,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       top: 160px;
     }
     .hero .image-wrapper {
-      /* padding-top: 6rem; */
       width: 700px;
       height: 900px;
     }
@@ -1139,10 +1028,8 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     }
 
     .latest-work .title {
-      /* border: 1px solid red; */
       display: flex;
       gap: 0.5rem;
-      /* align-items: center; */
     }
 
     .latest-work .projects {
@@ -1154,7 +1041,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     }
 
     .project.grid-1 {
-      /* border: 2px solid red; */
       grid-row-start: 1;
       grid-row-end: 4;
       grid-column-start: 1;
@@ -1217,7 +1103,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
   @media screen and (min-width: 1400px) {
     .container {
-      /* border: 2px solid red; */
       padding: 0rem 5rem;
     }
   }

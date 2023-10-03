@@ -101,6 +101,22 @@ const projectsContent = await client.fetch(
         }
       </div>
     </section>
+
+    <div class="next-project">
+      <div class="title">
+        <div class="text-wrapper">NEXT PROJECT</div>
+        <div class="fashion-week">Fashion<br />Week</div>
+      </div>
+      <div class="grid">
+        <div class="image-wrapper"></div>
+        <div class="cta-button">
+          <div class="overlap-group">
+            <div class="circle"><div class="get-in-touch">DISCOVER</div></div>
+            <div class="border"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
 
@@ -131,7 +147,6 @@ const projectsContent = await client.fetch(
 
   .hero .dancing-in-black {
     position: relative;
-    /* width: fit-content; */
     margin-top: -128px;
     font-family: "Clash Display-Regular", Helvetica;
     font-weight: 400;
@@ -156,16 +171,11 @@ const projectsContent = await client.fetch(
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    /* width: 955px; */
-    /* align-items: flex-start; */
-    /* gap: 104px; */
     position: relative;
-    /* flex: 0 0 auto; */
   }
 
   .content .text-wrapper {
     position: relative;
-    /* width: 150px; */
     margin-top: -1px;
     font-family: var(--heading-uppercase-h3-font-family);
     font-weight: var(--heading-uppercase-h3-font-weight);
@@ -245,7 +255,6 @@ const projectsContent = await client.fetch(
   /* projects */
 
   .latest-work {
-    /* border: 1px solid red; */
     margin-top: 14rem;
   }
 
@@ -273,18 +282,14 @@ const projectsContent = await client.fetch(
     font-style: var(--heading-large-primary-font-style);
   }
   .latest-work .grid {
-    /* border: 1px solid red; */
     display: flex;
-    /* align-items: center; */
     flex-direction: column;
     gap: 1rem;
     justify-content: space-between;
   }
   .button-text {
-    /* border: 1px solid red; */
     display: flex;
     align-items: center;
-    /* align-self: flex-start; */
     gap: 0.5rem;
   }
   .button-text .arrow-right {
@@ -299,14 +304,11 @@ const projectsContent = await client.fetch(
   }
 
   .button-text .icon {
-    /* border: 1px solid red; */
     position: relative;
     width: 31.21px;
     height: 14.71px;
-    /* margin-right: -0.71px; */
   }
   .projects {
-    /* border: 3px solid blue; */
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -314,7 +316,6 @@ const projectsContent = await client.fetch(
   }
 
   .projects .project-title {
-    /* border: 3px solid blue; */
     font-family: var(--heading-uppercase-h3-font-family);
     font-weight: var(--heading-uppercase-h3-font-weight);
     color: var(--textprimary);
@@ -333,6 +334,123 @@ const projectsContent = await client.fetch(
     letter-spacing: var(--text-default-letter-spacing);
     line-height: var(--text-default-line-height);
     font-style: var(--text-default-font-style);
+  }
+  /* next project */
+  .next-project {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 6rem;
+    position: relative;
+  }
+
+  .next-project .title {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    flex: 0 0 auto;
+    z-index: 1;
+  }
+
+  .next-project .text-wrapper {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: var(--heading-uppercase-small-font-family);
+    font-weight: var(--heading-uppercase-small-font-weight);
+    color: var(--textdefault);
+    font-size: var(--heading-uppercase-small-font-size);
+    letter-spacing: var(--heading-uppercase-small-letter-spacing);
+    line-height: var(--heading-uppercase-small-line-height);
+    white-space: nowrap;
+    font-style: var(--heading-uppercase-small-font-style);
+  }
+
+  .next-project .fashion-week {
+    position: relative;
+    width: fit-content;
+    font-family: var(--heading-xlarge-font-family);
+    font-weight: var(--heading-xlarge-font-weight);
+    color: var(--textprimary);
+    font-size: var(--heading-xlarge-font-size);
+    text-align: center;
+    letter-spacing: var(--heading-xlarge-letter-spacing);
+    line-height: var(--heading-xlarge-line-height);
+    font-style: var(--heading-xlarge-font-style);
+  }
+
+  .next-project .grid {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 0 0 auto;
+    margin-top: -80px;
+    z-index: 0;
+  }
+
+  .next-project .image-wrapper {
+    position: relative;
+    height: 855.56px;
+    background-image: url(./img/nick-wilkerson-gdv4e3-dodu-unsplash-1-1.png);
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+
+  .next-project .cta-button {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin-top: -120px;
+  }
+
+  .next-project .overlap-group {
+    position: relative;
+    width: 230px;
+    height: 220px;
+    left: -10px;
+  }
+
+  .next-project .circle {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 20px;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    background-color: var(--backgroundprimary);
+    border-radius: 500px;
+  }
+
+  .next-project .get-in-touch {
+    position: relative;
+    align-self: stretch;
+    font-family: var(--heading-uppercase-h4-font-family);
+    font-weight: var(--heading-uppercase-h4-font-weight);
+    color: var(--textinverse);
+    font-size: var(--heading-uppercase-h4-font-size);
+    text-align: center;
+    letter-spacing: var(--heading-uppercase-h4-letter-spacing);
+    line-height: var(--heading-uppercase-h4-line-height);
+    font-style: var(--heading-uppercase-h4-font-style);
+  }
+
+  .next-project .border {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    top: 0;
+    left: 10px;
+    border-radius: 110px;
+    border: 1px solid;
+    border-color: var(--borderprimary);
   }
 
   @media screen and (min-width: 1200px) {
@@ -354,7 +472,6 @@ const projectsContent = await client.fetch(
     }
 
     .project.grid-1 {
-      /* border: 2px solid red; */
       grid-row-start: 1;
       grid-row-end: 4;
       grid-column-start: 1;
