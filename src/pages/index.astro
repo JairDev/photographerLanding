@@ -10,6 +10,7 @@ const projects = await client.fetch(`*[_type == "projects"]{
   title,
   place,
   date,
+  "slug": slug.current,
   "image": image.asset->url,
   "alt": image.alt
 }`);
@@ -124,14 +125,16 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
               <div class="overlap-group-wrapper">
                 <div class="project-title">{project.title}</div>
               </div>
-              <div class="image-wrapper">
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  width={400}
-                  height={600}
-                />
-              </div>
+              <a href={`/projects/${project.slug}`}>
+                <div class="image-wrapper">
+                  <Image
+                    src={project.image}
+                    alt={project.alt}
+                    width={400}
+                    height={600}
+                  />
+                </div>
+              </a>
               <div class="wrapper-project-info">
                 {project.place}
                 <br />

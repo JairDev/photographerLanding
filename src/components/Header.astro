@@ -6,33 +6,28 @@
   <div class="div">
     <nav class="menu-nav">
       <div class="wrapper-header-nav">
-        <div class="jacob-gr-nberg">ANDREA MARTINEZ</div>
+        <div class="jacob-gr-nberg"><a href="/">ANDREA MARTINEZ</a></div>
         <div class="menu-toggle">
-          <!-- <img
-              class="menu-toggle"
-              src="../../src/assets/svg/menu_toggle.svg"
-            /> -->
-          <div class="overlap-group">
+          <img class="menu-off" src="../../src/assets/svg/menu_toggle.svg" />
+          <!-- <div class="overlap-group">
             <div class="line"></div>
             <div class="line-2"></div>
-          </div>
+          </div> -->
         </div>
       </div>
       <ul class="div-2">
         <li class="menu-item">
           <div class="text-wrapper">01</div>
-          <div class="text-wrapper-2">INICIO</div>
+          <div><a class="text-wrapper-2" href="/">INICIO</a></div>
         </li>
         <li class="menu-item">
           <div class="text-wrapper">02</div>
-          <div class="exhibitions">PROYECTOS</div>
+          <div class="text-wrapper">
+            <a class="exhibitions" href="/about">ACERCA DE</a>
+          </div>
         </li>
         <li class="menu-item">
           <div class="text-wrapper">03</div>
-          <div class="text-wrapper-2">ACERCA DE</div>
-        </li>
-        <li class="menu-item">
-          <div class="text-wrapper">04</div>
           <div class="text-wrapper-2">CONTACTO</div>
         </li>
       </ul>
@@ -48,11 +43,15 @@
 </div>
 
 <style>
+  a {
+    text-decoration: none;
+  }
   .menu {
+    background-color: var(--backgrounddefault);
     display: flex;
     flex-direction: row;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     width: 100%;
     min-height: 100vh;
     z-index: 10;
@@ -78,9 +77,8 @@
     position: relative;
   }
 
-  .menu .jacob-gr-nberg {
-    top: 48px;
-    left: 50px;
+  .menu .jacob-gr-nberg a {
+    text-decoration: none;
     font-family: var(--heading-uppercase-h4-font-family);
     font-weight: var(--heading-uppercase-h4-font-weight);
     color: var(--textdefault);
@@ -98,7 +96,7 @@
     gap: 40px;
     width: 100%;
     padding-top: 2rem;
-    opacity: 0;
+    opacity: 1;
   }
 
   .menu .menu-item {
@@ -138,7 +136,7 @@
 
   .menu .exhibitions {
     position: relative;
-    width: fit-content;
+    /* width: fit-content; */
     margin-top: -1px;
     font-family: var(--heading-uppercase-large-font-family);
     font-weight: var(--heading-uppercase-large-font-weight);
@@ -159,6 +157,13 @@
     border-radius: 100px;
     border: 1px solid;
     border-color: var(--borderprimary);
+  }
+  .menu-off {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    top: 82px;
+    left: 82px;
   }
 
   .menu .overlap-group {
