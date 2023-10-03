@@ -1,5 +1,9 @@
 ---
+import Layout from "../../layouts/Layout.astro";
 import { useSanityClient } from "@sanity/astro";
+import { PortableText } from "astro-portabletext";
+import { Image } from "astro:assets";
+import "../../styles/global.css";
 const client = useSanityClient();
 
 export async function getStaticPaths() {
@@ -22,6 +26,9 @@ const projectsContent = await client.fetch(
   title,
   "image": image.asset->url,
   date,
+  description,
+  service,
+  client,
   gallerys->{
     'images': image[]{
       "url": asset->url,
@@ -34,16 +41,344 @@ const projectsContent = await client.fetch(
 // console.log(projectsContent.gallerys.images);
 ---
 
-<div>
-  Este es el proyecto {slug}
-  <div>Name: {projectsContent.title}</div>
-  <div>Date: {projectsContent.date}</div>
-  {
-    projectsContent.gallerys.images.map((image) => (
-      <div>
-        <img src={image.url} />
-        <p>{image.imagename}</p>
+<Layout title={slug}>
+  <main class="main">
+    <section class="hero">
+      <div class="grid">
+        <div class="image-wrapper">
+          <Image
+            src={projectsContent?.gallerys?.images[0].url}
+            alt="alt"
+            width={400}
+            height={600}
+          />
+        </div>
+        <div class="title">
+          <div class="dancing-in-black">{projectsContent?.title}</div>
+        </div>
       </div>
-    ))
+
+      <div class="content">
+        <div class="grid">
+          <div class="text-wrapper">ACERCA DE</div>
+          <div class="massa-vitae-tortor">
+            <PortableText value={projectsContent.description} />
+          </div>
+        </div>
+        <div class="grid">
+          <div class="text-wrapper">DETALLES</div>
+          <div class="table">
+            <div class="row">
+              <div class="div">AÑO</div>
+              <div class="text-wrapper-2">{projectsContent.date}</div>
+            </div>
+            <div class="line"></div>
+            <div class="row">
+              <div class="div">SERVICIO</div>
+              <div class="text-wrapper-2">{projectsContent.service}</div>
+            </div>
+            <div class="line"></div>
+            <div class="row">
+              <div class="div">CLIENTE</div>
+              <div class="text-wrapper-2">{projectsContent.client}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects">
+        {
+          projectsContent?.gallerys?.images.slice(1).map((project, i) => (
+            <div class={`project grid-${i + 1}`}>
+              <div class="overlap-group-wrapper">
+                <div class="project-title">{project.title}</div>
+              </div>
+              <div class="image-wrapper">
+                <Image src={project.url} alt="alt" width={400} height={600} />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .main {
+    padding-top: 3rem;
   }
-</div>
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+  .hero div {
+    width: 100%;
+  }
+
+  .hero .grid {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .hero .dancing-in-black {
+    position: relative;
+    /* width: fit-content; */
+    margin-top: -128px;
+    font-family: "Clash Display-Regular", Helvetica;
+    font-weight: 400;
+    color: var(--textprimary);
+    font-size: 200px;
+    text-align: center;
+    letter-spacing: -6px;
+    line-height: 220px;
+  }
+
+  /* content */
+  .content {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4rem;
+    position: relative;
+    margin-top: 8rem;
+  }
+
+  .content .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    /* width: 955px; */
+    /* align-items: flex-start; */
+    /* gap: 104px; */
+    position: relative;
+    /* flex: 0 0 auto; */
+  }
+
+  .content .text-wrapper {
+    position: relative;
+    /* width: 150px; */
+    margin-top: -1px;
+    font-family: var(--heading-uppercase-h3-font-family);
+    font-weight: var(--heading-uppercase-h3-font-weight);
+    color: var(--textdefault);
+    font-size: var(--heading-uppercase-h3-font-size);
+    letter-spacing: var(--heading-uppercase-h3-letter-spacing);
+    line-height: var(--heading-uppercase-h3-line-height);
+    font-style: var(--heading-uppercase-h3-font-style);
+  }
+
+  .content .massa-vitae-tortor {
+    position: relative;
+    width: 700px;
+    margin-top: -1px;
+    font-family: var(--text-medium-font-family);
+    font-weight: var(--text-medium-font-weight);
+    color: var(--textdefault);
+    font-size: var(--text-medium-font-size);
+    letter-spacing: var(--text-medium-letter-spacing);
+    line-height: var(--text-medium-line-height);
+    font-style: var(--text-medium-font-style);
+  }
+
+  .content .table {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    flex-grow: 1;
+    display: flex;
+    gap: 32px;
+    position: relative;
+  }
+
+  .content .row {
+    align-items: center;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+    display: flex;
+    gap: 32px;
+    position: relative;
+  }
+
+  .content .div {
+    position: relative;
+    flex: 1;
+    font-family: var(--heading-h5-font-family);
+    font-weight: var(--heading-h5-font-weight);
+    color: var(--textprimary);
+    font-size: var(--heading-h5-font-size);
+    letter-spacing: var(--heading-h5-letter-spacing);
+    line-height: var(--heading-h5-line-height);
+    font-style: var(--heading-h5-font-style);
+  }
+
+  .content .text-wrapper-2 {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: var(--text-medium-font-family);
+    font-weight: var(--text-medium-font-weight);
+    color: var(--textdefault);
+    font-size: var(--text-medium-font-size);
+    letter-spacing: var(--text-medium-letter-spacing);
+    line-height: var(--text-medium-line-height);
+    white-space: nowrap;
+    font-style: var(--text-medium-font-style);
+  }
+
+  .content .line {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    height: 1px;
+    background-color: var(--borderdefault);
+  }
+  /* projects */
+
+  .latest-work {
+    /* border: 1px solid red; */
+    margin-top: 14rem;
+  }
+
+  .latest-work .latest {
+    position: relative;
+    font-family: var(--heading-uppercase-large-font-family);
+    font-weight: var(--heading-uppercase-large-font-weight);
+    color: var(--textdefault);
+    font-size: var(--heading-uppercase-large-font-size);
+    letter-spacing: var(--heading-uppercase-large-letter-spacing);
+    line-height: var(--heading-uppercase-large-line-height);
+    white-space: nowrap;
+    font-style: var(--heading-uppercase-large-font-style);
+  }
+  .latest-work .text-wrapper {
+    /* border: 1px solid red; */
+    position: relative;
+    font-family: var(--heading-large-primary-font-family);
+    font-weight: var(--heading-large-primary-font-weight);
+    color: var(--textprimary);
+    font-size: var(--heading-large-primary-font-size);
+    letter-spacing: var(--heading-large-primary-letter-spacing);
+    line-height: var(--heading-large-primary-line-height);
+    white-space: nowrap;
+    font-style: var(--heading-large-primary-font-style);
+  }
+  .latest-work .grid {
+    /* border: 1px solid red; */
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+  .button-text {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    /* align-self: flex-start; */
+    gap: 0.5rem;
+  }
+  .button-text .arrow-right {
+    font-family: var(--button-text-default-font-family);
+    font-weight: var(--button-text-default-font-weight);
+    color: var(--textdefault);
+    font-size: var(--button-text-default-font-size);
+    letter-spacing: var(--button-text-default-letter-spacing);
+    line-height: var(--button-text-default-line-height);
+    white-space: nowrap;
+    font-style: var(--button-text-default-font-style);
+  }
+
+  .button-text .icon {
+    /* border: 1px solid red; */
+    position: relative;
+    width: 31.21px;
+    height: 14.71px;
+    /* margin-right: -0.71px; */
+  }
+  .projects {
+    /* border: 3px solid blue; */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 14rem;
+  }
+
+  .projects .project-title {
+    /* border: 3px solid blue; */
+    font-family: var(--heading-uppercase-h3-font-family);
+    font-weight: var(--heading-uppercase-h3-font-weight);
+    color: var(--textprimary);
+    font-size: var(--heading-uppercase-h3-font-size);
+    letter-spacing: var(--heading-uppercase-h3-letter-spacing);
+    line-height: var(--heading-uppercase-h3-line-height);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .wrapper-project-info {
+    font-family: var(--text-default-font-family);
+    font-weight: var(--text-default-font-weight);
+    color: var(--textdefault);
+    font-size: var(--text-default-font-size);
+    letter-spacing: var(--text-default-letter-spacing);
+    line-height: var(--text-default-line-height);
+    font-style: var(--text-default-font-style);
+  }
+
+  @media screen and (min-width: 1200px) {
+    .grid .image-wrapper {
+      padding: 5rem 15rem 0rem;
+    }
+    .content {
+      padding-left: 12rem;
+    }
+    .content .grid {
+      grid-template-columns: 280px 1fr;
+    }
+    .latest-work .projects {
+      grid-template-columns: 40px 1fr 145px 100px 80px 200px 1fr;
+      grid-template-rows: 500px 280px 65px 245px 205px 290px 80px auto;
+    }
+    .latest-work .project .image-wrapper {
+      height: 100%;
+    }
+
+    .project.grid-1 {
+      /* border: 2px solid red; */
+      grid-row-start: 1;
+      grid-row-end: 4;
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+
+    .project.grid-2 {
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 6;
+      grid-column-end: 8;
+    }
+
+    .project.grid-3 {
+      grid-row-start: 5;
+      grid-row-end: 7;
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+    .project.grid-4 {
+      grid-row-start: 3;
+      grid-row-end: 6;
+      grid-column-start: 5;
+      grid-column-end: 7;
+    }
+  }
+</style>
