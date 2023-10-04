@@ -6,6 +6,10 @@ import { Image } from "astro:assets";
 import "../../styles/global.css";
 const client = useSanityClient();
 
+type Slug = {
+  slug?: string
+}
+
 export async function getStaticPaths() {
   const client = useSanityClient();
   const projects = await client.fetch(`*[_type == "projects"]{
@@ -20,7 +24,27 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-const projectsContent = await client.fetch(
+// const projectsContent = await client.fetch(
+//   `*[_type == "projects" && slug.current == $slug][0]{
+//   "slug": slug.current,
+//   title,
+//   "image": image.asset->url,
+//   date,
+//   description,
+//   service,
+//   client,
+//   gallerys->{
+//     'images': image[]{
+//       "url": asset->url,
+//       imagename
+//     }
+//   }
+// }`,
+//   { slug }
+// );
+
+async function getProjects(slug) {
+  return await client.fetch(
   `*[_type == "projects" && slug.current == $slug][0]{
   "slug": slug.current,
   title,
@@ -37,8 +61,30 @@ const projectsContent = await client.fetch(
   }
 }`,
   { slug }
-);
-// console.log(projectsContent.gallerys.images);
+)
+}
+
+
+// console.log(slug);
+const projects = await client.fetch(`*[_type == "projects"]{
+      "slug": slug.current
+  }`);
+function indexSearch() {
+  const currentProject = projects.findIndex(project => project.slug === slug)
+  console.log(currentProject)
+  const nextProject = projects.filter((project, i) => i === currentProject + 1)
+  const singleObject = {}
+  nextProject.forEach(element => {
+    Object.assign(singleObject, element)
+  });  
+  return singleObject
+}
+const slugNext : Slug = indexSearch()
+console.log(slug)
+const projectsContent = await getProjects(slug)
+const nextProjectToShow = await getProjects(slugNext.slug)
+console.log(projectsContent)
+
 ---
 
 <Layout title={slug}>
@@ -47,7 +93,7 @@ const projectsContent = await client.fetch(
       <div class="grid">
         <div class="image-wrapper">
           <Image
-            src={projectsContent?.gallerys?.images[0].url}
+            src={projectsContent.image}
             alt="alt"
             width={400}
             height={600}
@@ -60,7 +106,7 @@ const projectsContent = await client.fetch(
 
       <div class="content">
         <div class="grid">
-          <h2 class="text-wrapper">ACERCA DE</div>
+          <h2 class="text-wrapper">ACERCA DE</h2>
           <div class="massa-vitae-tortor">
             <PortableText value={projectsContent.description} />
           </div>
@@ -101,14 +147,18 @@ const projectsContent = await client.fetch(
 
     <div class="next-project">
       <div class="title">
-        <h3 class="text-wrapper">NEXT PROJECT</h3>
-        <h2 class="fashion-week">Fashion<br />Week</h2>
+        <h3 class="text-wrapper">PRÓXIMO PROYECTO</h3>
+        <h2 class="fashion-week">{nextProjectToShow.title}</h2>
       </div>
       <div class="grid">
-        <div class="image-wrapper"></div>
+        <div class="image-wrapper">
+          <img src={nextProjectToShow.image} />
+        </div>
         <div class="cta-button">
           <div class="overlap-group">
-            <div class="circle"><div class="get-in-touch">DISCOVER</div></div>
+            <!-- <div class="circle">
+            </div> -->
+            <a href={nextProjectToShow.slug} class="circle">DISCOVER</a>
             <div class="border"></div>
           </div>
         </div>
@@ -163,6 +213,7 @@ const projectsContent = await client.fetch(
     gap: 4rem;
     position: relative;
     margin-top: 5rem;
+    width: 100% ;
   }
 
   .content .grid {
@@ -187,7 +238,7 @@ const projectsContent = await client.fetch(
 
   .content .massa-vitae-tortor {
     position: relative;
-    width: 700px;
+    /* width: 700px; */
     margin-top: -1px;
     font-family: var(--text-medium-font-family);
     font-weight: var(--text-medium-font-weight);
@@ -421,18 +472,27 @@ const projectsContent = await client.fetch(
   }
 
   .next-project .circle {
+    background-color: var(--backgroundprimary);
+    border-radius: 500px;
     display: flex;
     flex-direction: column;
-    width: 200px;
-    height: 200px;
     align-items: center;
     justify-content: center;
-    padding: 0px 20px;
+    font-family: var(--heading-uppercase-h4-font-family);
+    font-weight: var(--heading-uppercase-h4-font-weight);
+    color: var(--textinverse);
+    font-size: var(--heading-uppercase-h4-font-size);
+    letter-spacing: var(--heading-uppercase-h4-letter-spacing);
+    line-height: var(--heading-uppercase-h4-line-height);
+    font-style: var(--heading-uppercase-h4-font-style);
     position: absolute;
     top: 10px;
     left: 0;
-    background-color: var(--backgroundprimary);
-    border-radius: 500px;
+    width: 200px;
+    height: 200px;
+    padding: 0px 20px;
+    text-decoration: none;
+    z-index: 10;
   }
 
   .next-project .get-in-touch {
