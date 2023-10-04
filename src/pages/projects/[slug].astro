@@ -24,25 +24,6 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-// const projectsContent = await client.fetch(
-//   `*[_type == "projects" && slug.current == $slug][0]{
-//   "slug": slug.current,
-//   title,
-//   "image": image.asset->url,
-//   date,
-//   description,
-//   service,
-//   client,
-//   gallerys->{
-//     'images': image[]{
-//       "url": asset->url,
-//       imagename
-//     }
-//   }
-// }`,
-//   { slug }
-// );
-
 async function getProjects(slug) {
   return await client.fetch(
   `*[_type == "projects" && slug.current == $slug][0]{
@@ -72,6 +53,11 @@ const projects = await client.fetch(`*[_type == "projects"]{
 function indexSearch() {
   const currentProject = projects.findIndex(project => project.slug === slug)
   console.log(currentProject)
+  if(currentProject === projects.length -1) {
+    // console.log(projects[0])
+    return projects[0]
+
+  }
   const nextProject = projects.filter((project, i) => i === currentProject + 1)
   const singleObject = {}
   nextProject.forEach(element => {
@@ -134,7 +120,7 @@ console.log(projectsContent)
 
       <div class="projects">
         {
-          projectsContent?.gallerys?.images.slice(1).map((project, i) => (
+          projectsContent?.gallerys?.images.map((project, i) => (
             <div class={`project grid-${i + 1}`}>
               <div class="image-wrapper">
                 <Image src={project.url} alt="alt" width={400} height={600} />
@@ -156,9 +142,7 @@ console.log(projectsContent)
         </div>
         <div class="cta-button">
           <div class="overlap-group">
-            <!-- <div class="circle">
-            </div> -->
-            <a href={nextProjectToShow.slug} class="circle">DISCOVER</a>
+            <a href={nextProjectToShow.slug} class="circle">DESCUBRIR</a>
             <div class="border"></div>
           </div>
         </div>
