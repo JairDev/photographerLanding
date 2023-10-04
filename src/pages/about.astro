@@ -12,7 +12,7 @@ const user = await client.fetch(`*[_type == "about"][0]{
   admin_name,
   "avatar": avatar.asset->url
 }`);
-console.log(user);
+// console.log(user);
 ---
 
 <!-- <h1>{slug}</h1> --><!-- <div>{user.admin_name}</div> -->
@@ -24,7 +24,7 @@ console.log(user);
           <img src={user.avatar} />
         </div>
         <div class="wrapper-hero-text">
-          <div class="about-hero">ACERCA DE</div>
+          <h1 class="about-hero">ACERCA DE</h1>
           <div class="name">
             <div class="text-wrapper">Andrea</div>
             <div class="div">Martinez</div>
@@ -35,7 +35,7 @@ console.log(user);
 
     <div class="about">
       <div class="grid">
-        <div class="text-wrapper">ACERCA DE</div>
+        <h2 class="text-wrapper">ACERCA DE</h2>
         <p class="massa-vitae-tortor">
           Massa vitae tortor condimentum lacinia quis vel eros donec. In
           fermentum et sollicitudin ac orci phasellus egestas tellus
@@ -51,7 +51,7 @@ console.log(user);
         </p>
       </div>
       <div class="grid">
-        <div class="text-wrapper">RECONOCIMIENTOS</div>
+        <h2 class="text-wrapper">RECONOCIMIENTOS</h2>
         <div class="table">
           <div class="row">
             <div class="div">
@@ -89,12 +89,15 @@ console.log(user);
     object-fit: cover;
   }
   .main {
-    padding-top: 6rem;
+    /* padding-top: 6rem; */
   }
 
   .hero .overlap-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
   }
 
   .hero .image-wrapper {
@@ -117,6 +120,9 @@ console.log(user);
     letter-spacing: var(--heading-xlarge-letter-spacing);
     line-height: var(--heading-xlarge-line-height);
     font-style: var(--heading-xlarge-font-style);
+  }
+  .wrapper-hero-text {
+    text-align: center;
   }
 
   .hero .div {
@@ -146,9 +152,9 @@ console.log(user);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8rem;
+    gap: 5rem;
     position: relative;
-    margin-top: 8rem;
+    margin-top: 6rem;
   }
 
   .about .grid {
@@ -268,6 +274,20 @@ console.log(user);
     height: 1px;
   }
 
+  @media screen and (min-width: 768px) {
+    .hero .overlap-group {
+      flex-direction: row;
+    }
+    .wrapper-hero-text {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .hero .image-wrapper {
+      width: 50%;
+    }
+  }
+
   @media screen and (min-width: 1200px) {
     .hero .overlap-group {
       flex-direction: row;
@@ -275,9 +295,11 @@ console.log(user);
 
     .wrapper-hero-text {
       padding: 4rem 0rem 0rem 3rem;
+      text-align: initial;
     }
-    .name {
+    .hero .name {
       margin-left: -120px;
+      text-align: center;
     }
     .about .grid {
       grid-template-columns: 200px 1fr;

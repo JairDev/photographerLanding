@@ -39,10 +39,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       <div class="overlap">
         <div class="overlap-group">
           <div class="headline">
-            <div class="jacob-gr-nberg">Andrea <br />Martinez</div>
+            <h1 class="jacob-gr-nberg">Andrea <br />Martinez</h1>
             <div class="before-layer">
-              <div class="photographer">FOTÓGRAFA</div>
-              <div class="visual-artist">&amp; ARTISTA VISUAL</div>
+              <h2 class="photographer">FOTÓGRAFA</h2>
+              <h2 class="visual-artist">&amp; ARTISTA VISUAL</h2>
             </div>
           </div>
           <div class="image-wrapper">
@@ -96,7 +96,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
             <div class="row">
               <div class="text-wrapper-2">{`0${index + 1}`}</div>
               <div class="grid-2">
-                <div class="text-wrapper-3">{service.service}</div>
+                <h2 class="text-wrapper-3">{service.service}</h2>
                 <div class="div-wrapper">
                   <PortableText value={service.description} />
                 </div>
@@ -110,20 +110,16 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     <section class="latest-work">
       <div class="grid">
         <div class="title">
-          <div class="text-wrapper">TRABAJOS</div>
-          <div class="latest">Recientes</div>
+          <h2 class="text-wrapper">TRABAJOS</h2>
+          <h2 class="latest">Recientes</h2>
         </div>
-        <!-- <div class="button-text">
-          <div class="arrow-right">Ver Todos</div>
-          <img class="icon" src="../../src/assets/svg/arrow-right.svg" />
-        </div> -->
       </div>
       <div class="projects">
         {
           projects.map((project, i) => (
             <div class={`project grid-${i + 1}`}>
               <div class="overlap-group-wrapper">
-                <div class="project-title">{project.title}</div>
+                <h3 class="project-title">{project.title}</h3>
               </div>
               <a href={`/projects/${project.slug}`}>
                 <div class="image-wrapper">
@@ -151,16 +147,16 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
         <div class="frame">
           <div class="title">
             <div class="overlap-group">
-              <div class="what-my-clients">
+              <h2 class="what-my-clients">
                 QUE<span class="text-wrapper"> DICEN</span> MIS
-              </div>
-              <div class="what-my-clients">CLIENTES</div>
+              </h2>
+              <h2 class="what-my-clients">CLIENTES</h2>
             </div>
           </div>
           <p class="worked-with-over">
-            <span class="span">He trabajado con mas de</span>
+            <h2 class="span">He trabajado con mas de</h2>
             <span class="text-wrapper-2"> 50 CLIENTES</span>
-            <span class="span"> en todo el país</span>
+            <h2 class="span">en todo el país</h2>
           </p>
         </div>
         <button class="button">
@@ -189,7 +185,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
                         class="quote"
                         src="../../src/assets/svg/comillas.svg"
                       />
-                      <p class="text-wrapper-3">{testimonial.testimonial}</p>
+                      <h3 class="text-wrapper-3">{testimonial.testimonial}</h3>
                     </div>
                     <div class="grid-3">
                       <div class="subnav">

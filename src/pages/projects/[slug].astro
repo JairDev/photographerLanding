@@ -54,19 +54,19 @@ const projectsContent = await client.fetch(
           />
         </div>
         <div class="title">
-          <div class="dancing-in-black">{projectsContent?.title}</div>
+          <h1 class="dancing-in-black">{projectsContent?.title}</h1>
         </div>
       </div>
 
       <div class="content">
         <div class="grid">
-          <div class="text-wrapper">ACERCA DE</div>
+          <h2 class="text-wrapper">ACERCA DE</div>
           <div class="massa-vitae-tortor">
             <PortableText value={projectsContent.description} />
           </div>
         </div>
         <div class="grid">
-          <div class="text-wrapper">DETALLES</div>
+          <h2 class="text-wrapper">DETALLES</h2>
           <div class="table">
             <div class="row">
               <div class="div">AÑO</div>
@@ -90,9 +90,6 @@ const projectsContent = await client.fetch(
         {
           projectsContent?.gallerys?.images.slice(1).map((project, i) => (
             <div class={`project grid-${i + 1}`}>
-              <div class="overlap-group-wrapper">
-                <div class="project-title">{project.title}</div>
-              </div>
               <div class="image-wrapper">
                 <Image src={project.url} alt="alt" width={400} height={600} />
               </div>
@@ -104,8 +101,8 @@ const projectsContent = await client.fetch(
 
     <div class="next-project">
       <div class="title">
-        <div class="text-wrapper">NEXT PROJECT</div>
-        <div class="fashion-week">Fashion<br />Week</div>
+        <h3 class="text-wrapper">NEXT PROJECT</h3>
+        <h2 class="fashion-week">Fashion<br />Week</h2>
       </div>
       <div class="grid">
         <div class="image-wrapper"></div>
@@ -128,6 +125,7 @@ const projectsContent = await client.fetch(
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 30%;
   }
   .hero {
     display: inline-flex;
@@ -136,9 +134,9 @@ const projectsContent = await client.fetch(
     position: relative;
     width: 100%;
   }
-  .hero div {
+  /* .hero div {
     width: 100%;
-  }
+  } */
 
   .hero .grid {
     position: relative;
@@ -147,14 +145,14 @@ const projectsContent = await client.fetch(
 
   .hero .dancing-in-black {
     position: relative;
-    margin-top: -128px;
+    margin-top: 2rem;
     font-family: "Clash Display-Regular", Helvetica;
     font-weight: 400;
     color: var(--textprimary);
-    font-size: 200px;
+    font-size: var(--heading-xlarge-font-size);
     text-align: center;
     letter-spacing: -6px;
-    line-height: 220px;
+    line-height: 100%;
   }
 
   /* content */
@@ -164,14 +162,15 @@ const projectsContent = await client.fetch(
     align-items: flex-start;
     gap: 4rem;
     position: relative;
-    margin-top: 8rem;
+    margin-top: 5rem;
   }
 
   .content .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 2rem;
     position: relative;
+    width: 100%;
   }
 
   .content .text-wrapper {
@@ -310,9 +309,16 @@ const projectsContent = await client.fetch(
   }
   .projects {
     display: grid;
-    grid-template-columns: 1fr;
+    /* grid-template-columns: 1fr; */
+    grid-template-areas: "item";
     gap: 2rem;
     margin-top: 14rem;
+    width: 100%;
+  }
+
+  .projects .image-wrapper {
+    /* border: 2px solid red; */
+    height: 100%;
   }
 
   .projects .project-title {
@@ -341,7 +347,7 @@ const projectsContent = await client.fetch(
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 6rem;
+    margin-top: 12rem;
     position: relative;
   }
 
@@ -453,25 +459,66 @@ const projectsContent = await client.fetch(
     border-color: var(--borderprimary);
   }
 
+  @media screen and (min-width: 768px) {
+    .projects {
+      /* grid-template-columns: 1fr 1fr; */
+      grid-gap: 6rem;
+      grid-template-rows: 600px 800px 600px;
+      grid-template-areas:
+        "item1 item1 item2 "
+        "item3 item3 item3 "
+        "item4 item5 item5 ";
+    }
+    .project:nth-child(even) {
+      /* border: 2px solid red; */
+      padding: 3rem 0rem;
+    }
+    .project.grid-1 {
+      grid-area: item1;
+    }
+    .project.grid-2 {
+      grid-area: item2;
+    }
+    .project.grid-3 {
+      grid-area: item3;
+    }
+    .project.grid-4 {
+      grid-area: item4;
+    }
+    .project.grid-5 {
+      grid-area: item5;
+    }
+  }
+
   @media screen and (min-width: 1200px) {
+    .hero .dancing-in-black {
+      margin-top: -80px
+    }
     .grid .image-wrapper {
       padding: 5rem 15rem 0rem;
     }
     .content {
-      padding-left: 12rem;
-    }
-    .content .grid {
-      grid-template-columns: 280px 1fr;
-    }
-    .latest-work .projects {
-      grid-template-columns: 40px 1fr 145px 100px 80px 200px 1fr;
-      grid-template-rows: 500px 280px 65px 245px 205px 290px 80px auto;
-    }
-    .latest-work .project .image-wrapper {
-      height: 100%;
+      /* padding-left: 20rem; */
+      gap: 7rem;
     }
 
-    .project.grid-1 {
+    .content .grid {
+      grid-template-columns: 280px 1fr;
+      gap: 5rem;
+    }
+
+    .projects {
+      grid-template-rows: 700px 900px 700px;
+
+    /* .latest-work .projects {
+      grid-template-columns: 40px 1fr 145px 100px 80px 200px 1fr;
+      grid-template-rows: 500px 280px 65px 245px 205px 290px 80px auto;
+    } */
+    .latest-work .project .image-wrapper {
+      /* height: 100%; */
+    }
+
+    /* .project.grid-1 {
       grid-row-start: 1;
       grid-row-end: 4;
       grid-column-start: 1;
@@ -496,6 +543,6 @@ const projectsContent = await client.fetch(
       grid-row-end: 6;
       grid-column-start: 5;
       grid-column-end: 7;
-    }
+    } */
   }
 </style>
