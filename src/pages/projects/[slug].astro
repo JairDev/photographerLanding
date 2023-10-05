@@ -45,16 +45,12 @@ async function getProjects(slug) {
 )
 }
 
-
-// console.log(slug);
 const projects = await client.fetch(`*[_type == "projects"]{
       "slug": slug.current
   }`);
 function indexSearch() {
   const currentProject = projects.findIndex(project => project.slug === slug)
-  console.log(currentProject)
   if(currentProject === projects.length -1) {
-    // console.log(projects[0])
     return projects[0]
 
   }
@@ -66,10 +62,8 @@ function indexSearch() {
   return singleObject
 }
 const slugNext : Slug = indexSearch()
-console.log(slug)
 const projectsContent = await getProjects(slug)
 const nextProjectToShow = await getProjects(slugNext.slug)
-console.log(projectsContent)
 
 ---
 
@@ -79,7 +73,7 @@ console.log(projectsContent)
       <div class="grid">
         <div class="image-wrapper">
           <Image
-            src={projectsContent.image}
+            src={projectsContent?.image}
             alt="alt"
             width={400}
             height={600}
@@ -120,7 +114,7 @@ console.log(projectsContent)
 
       <div class="projects">
         {
-          projectsContent?.gallerys?.images.map((project, i) => (
+          projectsContent?.gallerys?.images?.map((project, i) => (
             <div class={`project grid-${i + 1}`}>
               <div class="image-wrapper">
                 <Image src={project.url} alt="alt" width={400} height={600} />
@@ -436,7 +430,7 @@ console.log(projectsContent)
   .next-project .image-wrapper {
     position: relative;
     height: 855.56px;
-    background-image: url(./img/nick-wilkerson-gdv4e3-dodu-unsplash-1-1.png);
+    /* background-image: url(./img/nick-wilkerson-gdv4e3-dodu-unsplash-1-1.png); */
     background-size: cover;
     background-position: 50% 50%;
   }
