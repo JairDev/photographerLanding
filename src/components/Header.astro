@@ -3,287 +3,352 @@
 ---
 
 <div class="menu">
-  <div class="div">
-    <nav class="menu-nav">
-      <div class="wrapper-header-nav">
-        <div class="jacob-gr-nberg"><a href="/">ANDREA MARTINEZ</a></div>
-        <div class="menu-toggle">
-          <img class="menu-off" src="../../src/assets/svg/menu_toggle.svg" />
-          <div class="overlap-group">
-            <div class="line"></div>
-            <div class="line-2"></div>
-          </div>
+  <div class="content-menu-back-layer">
+    <span class="layer-menu"></span>
+    <span class="layer-menu"></span>
+    <span class="layer-menu"></span>
+    <span class="layer-menu"></span>
+  </div>
+  <!-- <div class="div"> -->
+  <nav class="menu-nav">
+    <div class="wrapper-header-nav">
+      <div class="jacob-gr-nberg"><a href="/">ANDREA MARTINEZ</a></div>
+      <div class="menu-toggle">
+        <img class="menu-off" src="../../src/assets/svg/menu_toggle.svg" />
+        <div class="overlap-group">
+          <div class="line"></div>
+          <div class="line-2"></div>
         </div>
       </div>
+    </div>
+    <div class="wrapper-links">
       <ul class="div-2">
         <li class="menu-item">
-          <div class="text-wrapper">01</div>
-          <div><a class="text-wrapper-2" href="/">INICIO</a></div>
-        </li>
-        <li class="menu-item">
-          <div class="text-wrapper">02</div>
-          <div class="text-wrapper">
-            <a class="exhibitions" href="/about">ACERCA DE</a>
+          <div class="wrapper-hidden">
+            <div class="text-wrapper">01</div>
+            <div><a class="text-wrapper-2" href="/">INICIO</a></div>
           </div>
         </li>
         <li class="menu-item">
-          <div class="text-wrapper">03</div>
-          <div class="text-wrapper-2">CONTACTO</div>
+          <div class="wrapper-hidden">
+            <div class="text-wrapper">02</div>
+            <div class="text-wrapper">
+              <a class="exhibitions" href="/about">ACERCA DE</a>
+            </div>
+          </div>
+        </li>
+        <li class="menu-item">
+          <div class="wrapper-hidden">
+            <div class="text-wrapper">03</div>
+            <div class="text-wrapper-2">CONTACTO</div>
+          </div>
         </li>
       </ul>
-      <div class="menu-bttom">
+      <div class="menu-bottom">
         <!-- <div class="column-2">
-          <div class="text-wrapper-4">TWITTER</div>
-          <div class="text-wrapper-4">INSTAGRAM</div>
-          <div class="text-wrapper-4">FACEBOOK</div>
-        </div> -->
+            <div class="text-wrapper-4">TWITTER</div>
+            <div class="text-wrapper-4">INSTAGRAM</div>
+            <div class="text-wrapper-4">FACEBOOK</div>
+          </div> -->
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
+  <!-- </div> -->
+
+  <script>
+    // gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline({ paused: true });
+    function openNav() {
+      animateOpenNav();
+      const defaultMenu = document.querySelector(".menu-off");
+      const closeMenu = document.querySelector(".overlap-group");
+      const toggleMenu = document.querySelector(".menu-toggle");
+
+      toggleMenu.onclick = function (e) {
+        tl.reversed(!tl.reversed());
+        defaultMenu.classList.toggle("hidden");
+        closeMenu.classList.toggle("show");
+      };
+    }
+
+    function animateOpenNav() {
+      const menu = document.querySelector(".wrapper-links");
+      const layers = document.querySelectorAll(".layer-menu");
+      const links = document.querySelectorAll(".wrapper-hidden");
+      tl.to(menu, {
+        duration: 0.01,
+        yPercent: 100,
+      })
+        .to(layers, {
+          yPercent: 100,
+          stagger: 0.07,
+        })
+        .to(links, {
+          opacity: 1,
+          yPercent: -100,
+          stagger: 0.07,
+        })
+        .reverse();
+    }
+    openNav();
+  </script>
+
+  <style>
+    a {
+      text-decoration: none;
+    }
+    .menu {
+      /* background-color: var(--backgrounddefault); */
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      position: fixed;
+      width: 100%;
+      /* min-height: 100vh; */
+      z-index: 10;
+    }
+    .content-menu-back-layer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-rows: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .layer-menu {
+      background-color: var(--backgrounddefault);
+      display: block;
+      opacity: 1;
+      transform: translateY(-100%);
+    }
+
+    .wrapper-header-nav {
+      display: flex;
+      padding: 2rem 0rem;
+      position: relative;
+      z-index: 20;
+    }
+
+    .menu-nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      padding: 0rem 1rem;
+    }
+
+    .menu .div {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .menu .jacob-gr-nberg a {
+      text-decoration: none;
+      font-family: var(--heading-uppercase-h4-font-family);
+      font-weight: var(--heading-uppercase-h4-font-weight);
+      color: var(--textdefault);
+      font-size: var(--heading-uppercase-h4-font-size);
+      letter-spacing: var(--heading-uppercase-h4-letter-spacing);
+      line-height: var(--heading-uppercase-h4-line-height);
+      white-space: nowrap;
+      font-style: var(--heading-uppercase-h4-font-style);
+    }
+
+    .wrapper-links {
+      /* transform: scale(0); */
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding-top: 6rem;
+      width: 100%;
+      transform: translateY(-100%);
+    }
+
+    .menu .div-2 {
+      /* border: 1px solid red; */
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      padding-top: 2rem;
+      /* opacity: 0; */
+      /* display: none; */
+      z-index: 0;
+    }
+
+    .menu .menu-item {
+      /* border: 1px solid red; */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wrapper-hidden {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
+    .menu .text-wrapper {
+      position: relative;
+      width: fit-content;
+      font-family: var(--heading-uppercase-h3-font-family);
+      font-weight: var(--heading-uppercase-h3-font-weight);
+      color: var(--textprimary);
+      font-size: var(--heading-uppercase-h3-font-size);
+      letter-spacing: var(--heading-uppercase-h3-letter-spacing);
+      line-height: var(--heading-uppercase-h3-line-height);
+      white-space: nowrap;
+      font-style: var(--heading-uppercase-h3-font-style);
+    }
+
+    .menu .text-wrapper-2 {
+      position: relative;
+      /* width: fit-content; */
+      margin-top: -1px;
+      font-family: var(--heading-uppercase-large-font-family);
+      font-weight: var(--heading-uppercase-large-font-weight);
+      color: var(--textdefault);
+      font-size: var(--heading-uppercase-large-font-size);
+      letter-spacing: var(--heading-uppercase-large-letter-spacing);
+      line-height: var(--heading-uppercase-large-line-height);
+      white-space: nowrap;
+      font-style: var(--heading-uppercase-large-font-style);
+    }
+
+    .menu .exhibitions {
+      position: relative;
+      /* width: fit-content; */
+      margin-top: -1px;
+      font-family: var(--heading-uppercase-large-font-family);
+      font-weight: var(--heading-uppercase-large-font-weight);
+      color: var(--textprimary);
+      font-size: var(--heading-uppercase-large-font-size);
+      letter-spacing: var(--heading-uppercase-large-letter-spacing);
+      line-height: var(--heading-uppercase-large-line-height);
+      white-space: nowrap;
+      font-style: var(--heading-uppercase-large-font-style);
+    }
+
+    .menu .menu-toggle {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      top: -50px;
+      right: -50px;
+      border-radius: 100px;
+      border: 1px solid;
+      border-color: var(--borderprimary);
+    }
+    .menu-off {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      top: 82px;
+      left: 82px;
+      opacity: 1;
+    }
+    .menu-off.hidden {
+      opacity: 0;
+    }
+
+    .overlap-group {
+      position: relative;
+      width: 36px;
+      height: 36px;
+      top: 82px;
+      left: 82px;
+      opacity: 0;
+    }
+    .overlap-group.show {
+      opacity: 1;
+    }
+
+    .menu .line {
+      position: absolute;
+      width: 50px;
+      top: 18px;
+      left: -7px;
+      transform: rotate(-45deg);
+      height: 1px;
+      background-color: var(--bordersecondary);
+    }
+
+    .menu .line-2 {
+      position: absolute;
+      width: 50px;
+      top: 18px;
+      left: -7px;
+      transform: rotate(45deg);
+      height: 1px;
+      background-color: var(--bordersecondary);
+    }
+
+    .menu .menu-bottom {
+      display: flex;
+      /* width: 1600px; */
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 0rem 2rem;
+      z-index: 0;
+    }
+
+    .menu .column {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .menu .text-wrapper-3 {
+      position: relative;
+      width: fit-content;
+      margin-top: -1px;
+      font-family: var(--text-default-font-family);
+      font-weight: var(--text-default-font-weight);
+      color: var(--textdefault);
+      font-size: var(--text-default-font-size);
+      letter-spacing: var(--text-default-letter-spacing);
+      line-height: var(--text-default-line-height);
+      white-space: nowrap;
+      font-style: var(--text-default-font-style);
+    }
+
+    .menu .line-3 {
+      position: relative;
+      width: 15px;
+      height: 1px;
+      background-color: var(--bordersecondary);
+    }
+
+    .menu .column-2 {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 30px;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .menu .text-wrapper-4 {
+      position: relative;
+      width: fit-content;
+      margin-top: -1px;
+      font-family: var(--heading-h6-font-family);
+      font-weight: var(--heading-h6-font-weight);
+      color: var(--textdefault);
+      font-size: var(--heading-h6-font-size);
+      letter-spacing: var(--heading-h6-letter-spacing);
+      line-height: var(--heading-h6-line-height);
+      white-space: nowrap;
+      font-style: var(--heading-h6-font-style);
+    }
+  </style>
 </div>
-<script>
-  // const menu = document.querySelector(".menu");
-  // const toggleMenu = document.querySelector(".menu-toggle");
-  // const defaultMenu = document.querySelector(".menu-off");
-  // const closeMenu = document.querySelector(".overlap-group");
-  // toggleMenu.addEventListener("click", function (e) {
-  //   e.preventDefault();
-  //   // defaultMenu.classList.toggle("hidden");
-  //   // closeMenu.classList.toggle("show");
-  //   console.log(menu);
-  // });
-</script>
-
-<style>
-  a {
-    text-decoration: none;
-  }
-  .menu {
-    /* background-color: var(--backgrounddefault); */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-    /* min-height: 100vh; */
-    z-index: 10;
-  }
-
-  .menu::before {
-    content: "";
-    background: var(--backgrounddefault);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-
-  .wrapper-header-nav {
-    display: flex;
-    padding: 2rem 0rem;
-    position: relative;
-  }
-
-  .menu-nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding: 0rem 1rem;
-  }
-
-  .menu .div {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-  }
-
-  .menu .jacob-gr-nberg a {
-    text-decoration: none;
-    font-family: var(--heading-uppercase-h4-font-family);
-    font-weight: var(--heading-uppercase-h4-font-weight);
-    color: var(--textdefault);
-    font-size: var(--heading-uppercase-h4-font-size);
-    letter-spacing: var(--heading-uppercase-h4-letter-spacing);
-    line-height: var(--heading-uppercase-h4-line-height);
-    white-space: nowrap;
-    font-style: var(--heading-uppercase-h4-font-style);
-  }
-
-  .menu .div-2 {
-    border: 1px solid red;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    width: 100%;
-    padding-top: 2rem;
-    opacity: 0;
-    display: none;
-  }
-
-  .menu .menu-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    position: relative;
-    flex: 0 0 auto;
-  }
-
-  .menu .text-wrapper {
-    position: relative;
-    width: fit-content;
-    font-family: var(--heading-uppercase-h3-font-family);
-    font-weight: var(--heading-uppercase-h3-font-weight);
-    color: var(--textprimary);
-    font-size: var(--heading-uppercase-h3-font-size);
-    letter-spacing: var(--heading-uppercase-h3-letter-spacing);
-    line-height: var(--heading-uppercase-h3-line-height);
-    white-space: nowrap;
-    font-style: var(--heading-uppercase-h3-font-style);
-  }
-
-  .menu .text-wrapper-2 {
-    position: relative;
-    /* width: fit-content; */
-    margin-top: -1px;
-    font-family: var(--heading-uppercase-large-font-family);
-    font-weight: var(--heading-uppercase-large-font-weight);
-    color: var(--textdefault);
-    font-size: var(--heading-uppercase-large-font-size);
-    letter-spacing: var(--heading-uppercase-large-letter-spacing);
-    line-height: var(--heading-uppercase-large-line-height);
-    white-space: nowrap;
-    font-style: var(--heading-uppercase-large-font-style);
-  }
-
-  .menu .exhibitions {
-    position: relative;
-    /* width: fit-content; */
-    margin-top: -1px;
-    font-family: var(--heading-uppercase-large-font-family);
-    font-weight: var(--heading-uppercase-large-font-weight);
-    color: var(--textprimary);
-    font-size: var(--heading-uppercase-large-font-size);
-    letter-spacing: var(--heading-uppercase-large-letter-spacing);
-    line-height: var(--heading-uppercase-large-line-height);
-    white-space: nowrap;
-    font-style: var(--heading-uppercase-large-font-style);
-  }
-
-  .menu .menu-toggle {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    top: -50px;
-    right: -50px;
-    border-radius: 100px;
-    border: 1px solid;
-    border-color: var(--borderprimary);
-  }
-  .menu-off {
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    top: 82px;
-    left: 82px;
-    opacity: 1;
-  }
-  .menu-off.hidden {
-    opacity: 0;
-  }
-
-  .overlap-group {
-    position: relative;
-    width: 36px;
-    height: 36px;
-    top: 82px;
-    left: 82px;
-    opacity: 0;
-  }
-  .overlap-group.show {
-    opacity: 1;
-  }
-
-  .menu .line {
-    position: absolute;
-    width: 50px;
-    top: 18px;
-    left: -7px;
-    transform: rotate(-45deg);
-    height: 1px;
-    background-color: var(--bordersecondary);
-  }
-
-  .menu .line-2 {
-    position: absolute;
-    width: 50px;
-    top: 18px;
-    left: -7px;
-    transform: rotate(45deg);
-    height: 1px;
-    background-color: var(--bordersecondary);
-  }
-
-  .menu .menu-bttom {
-    display: flex;
-    /* width: 1600px; */
-    align-items: center;
-    justify-content: space-between;
-    padding: 4rem 0rem 2rem;
-  }
-
-  .menu .column {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
-    flex: 0 0 auto;
-  }
-
-  .menu .text-wrapper-3 {
-    position: relative;
-    width: fit-content;
-    margin-top: -1px;
-    font-family: var(--text-default-font-family);
-    font-weight: var(--text-default-font-weight);
-    color: var(--textdefault);
-    font-size: var(--text-default-font-size);
-    letter-spacing: var(--text-default-letter-spacing);
-    line-height: var(--text-default-line-height);
-    white-space: nowrap;
-    font-style: var(--text-default-font-style);
-  }
-
-  .menu .line-3 {
-    position: relative;
-    width: 15px;
-    height: 1px;
-    background-color: var(--bordersecondary);
-  }
-
-  .menu .column-2 {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 30px;
-    position: relative;
-    flex: 0 0 auto;
-  }
-
-  .menu .text-wrapper-4 {
-    position: relative;
-    width: fit-content;
-    margin-top: -1px;
-    font-family: var(--heading-h6-font-family);
-    font-weight: var(--heading-h6-font-weight);
-    color: var(--textdefault);
-    font-size: var(--heading-h6-font-size);
-    letter-spacing: var(--heading-h6-letter-spacing);
-    line-height: var(--heading-h6-line-height);
-    white-space: nowrap;
-    font-style: var(--heading-h6-font-style);
-  }
-</style>

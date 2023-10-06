@@ -109,7 +109,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
     <section class="latest-work">
       <div class="grid">
-        <div class="title">
+        <div class="title hidden">
           <h2 class="text-wrapper">TRABAJOS</h2>
           <h2 class="latest">Recientes</h2>
         </div>
@@ -123,6 +123,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
               </div>
               <a href={`/projects/${project.slug}`}>
                 <div class="image-wrapper">
+                  <span class="layer-project" />
                   <Image
                     src={project.image}
                     alt={project.alt}
@@ -207,6 +208,56 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     </section>
   </main>
 </Layout>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+  const service = document.querySelectorAll(".row");
+  const titles = document.querySelectorAll(".title.hidden");
+  const images = document.querySelectorAll(".projects .image-wrapper");
+  const layers = gsap.utils.toArray(".layer-project");
+  service.forEach((service) => {
+    gsap.from(service, {
+      scrollTrigger: {
+        trigger: service,
+        start: "top 90%",
+        // markers: true,
+      },
+      y: 60,
+      opacity: 0,
+    });
+  });
+
+  titles.forEach((title) => {
+    gsap.from(title, {
+      scrollTrigger: {
+        trigger: title,
+        start: "top 90%",
+        // markers: true,
+      },
+      y: 60,
+      opacity: 0,
+    });
+  });
+
+  images.forEach((project, i) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: project,
+        start: "top 40%",
+        // markers: true,
+        ease: "expo.out",
+      },
+    });
+    tl.from(layers[i], {
+      yPercent: 100,
+      // opacity: 0,
+    }).to(layers[i], {
+      yPercent: -102,
+    });
+    // layers.forEach((layer) => {
+    // });
+  });
+</script>
 
 <style>
   .header {
@@ -303,7 +354,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     opacity: 1;
   }
 
-  .image-wrapper img {
+  .project .image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -590,9 +641,27 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
   .latest-work .projects {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 6rem;
+    grid-template-areas: "item";
+    gap: 12rem;
     margin-top: 4rem;
+    width: 100%;
+  }
+
+  .project .image-wrapper {
+    /* height: 100%; */
+    overflow: hidden;
+    position: relative;
+  }
+
+  .layer-project {
+    background-color: var(--textprimary);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
   }
 
   .projects .project-title {
@@ -1017,6 +1086,33 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       display: block;
     }
 
+    .latest-work .projects {
+      /* grid-template-columns: 1fr 1fr; */
+      /* gap: 6rem; */
+      grid-template-areas:
+        "item1 item1 item2"
+        "item3 item4 item4";
+      /* grid-template-rows: 600px 800px; */
+    }
+    .project:nth-child(3) {
+      /* border: 2px solid red; */
+      /* padding: 3rem 0rem; */
+      /* margin: 12rem 0rem; */
+    }
+
+    .project.grid-1 {
+      grid-area: item1;
+    }
+    .project.grid-2 {
+      grid-area: item2;
+    }
+    .project.grid-3 {
+      grid-area: item3;
+    }
+    .project.grid-4 {
+      grid-area: item4;
+    }
+
     .clients .grid-2 {
       gap: 3rem;
       flex-direction: row;
@@ -1030,6 +1126,14 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   @media screen and (min-width: 1200px) {
+    .project:nth-child(2) {
+      /* border: 1px solid red; */
+      margin: 10rem 2rem 4rem;
+    }
+    .project:nth-child(3) {
+      /* border: 1px solid red; */
+      margin: 10rem 2rem 4rem;
+    }
     .header {
       padding: 1rem 2.5rem;
     }
@@ -1088,41 +1192,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     .latest-work .title {
       display: flex;
       gap: 0.5rem;
-    }
-
-    .latest-work .projects {
-      grid-template-columns: 40px 1fr 145px 100px 80px 200px 1fr;
-      grid-template-rows: 500px 280px 65px 245px 205px 290px 80px auto;
-    }
-    .latest-work .project .image-wrapper {
-      height: 100%;
-    }
-
-    .project.grid-1 {
-      grid-row-start: 1;
-      grid-row-end: 4;
-      grid-column-start: 1;
-      grid-column-end: 4;
-    }
-
-    .project.grid-2 {
-      grid-row-start: 1;
-      grid-row-end: 2;
-      grid-column-start: 6;
-      grid-column-end: 8;
-    }
-
-    .project.grid-3 {
-      grid-row-start: 5;
-      grid-row-end: 7;
-      grid-column-start: 2;
-      grid-column-end: 4;
-    }
-    .project.grid-4 {
-      grid-row-start: 3;
-      grid-row-end: 6;
-      grid-column-start: 5;
-      grid-column-end: 7;
     }
 
     .clients {

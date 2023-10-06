@@ -7,8 +7,8 @@ import "../../styles/global.css";
 const client = useSanityClient();
 
 type Slug = {
-  slug?: string
-}
+  slug?: string;
+};
 
 export async function getStaticPaths() {
   const client = useSanityClient();
@@ -26,7 +26,7 @@ const { slug } = Astro.params;
 
 async function getProjects(slug) {
   return await client.fetch(
-  `*[_type == "projects" && slug.current == $slug][0]{
+    `*[_type == "projects" && slug.current == $slug][0]{
   "slug": slug.current,
   title,
   "image": image.asset->url,
@@ -41,30 +41,28 @@ async function getProjects(slug) {
     }
   }
 }`,
-  { slug }
-)
+    { slug }
+  );
 }
 
 const projects = await client.fetch(`*[_type == "projects"]{
       "slug": slug.current
   }`);
 function indexSearch() {
-  const currentProject = projects.findIndex(project => project.slug === slug)
-  if(currentProject === projects.length -1) {
-    return projects[0]
-
+  const currentProject = projects.findIndex((project) => project.slug === slug);
+  if (currentProject === projects.length - 1) {
+    return projects[0];
   }
-  const nextProject = projects.filter((project, i) => i === currentProject + 1)
-  const singleObject = {}
-  nextProject.forEach(element => {
-    Object.assign(singleObject, element)
-  });  
-  return singleObject
+  const nextProject = projects.filter((project, i) => i === currentProject + 1);
+  const singleObject = {};
+  nextProject.forEach((element) => {
+    Object.assign(singleObject, element);
+  });
+  return singleObject;
 }
-const slugNext : Slug = indexSearch()
-const projectsContent = await getProjects(slug)
-const nextProjectToShow = await getProjects(slugNext.slug)
-
+const slugNext: Slug = indexSearch();
+const projectsContent = await getProjects(slug);
+const nextProjectToShow = await getProjects(slugNext.slug);
 ---
 
 <Layout title={slug}>
@@ -191,7 +189,7 @@ const nextProjectToShow = await getProjects(slugNext.slug)
     gap: 4rem;
     position: relative;
     margin-top: 5rem;
-    width: 100% ;
+    width: 100%;
   }
 
   .content .grid {
@@ -530,7 +528,7 @@ const nextProjectToShow = await getProjects(slugNext.slug)
 
   @media screen and (min-width: 1200px) {
     .hero .dancing-in-black {
-      margin-top: -80px
+      margin-top: -80px;
     }
     .grid .image-wrapper {
       padding: 5rem 15rem 0rem;
@@ -547,40 +545,6 @@ const nextProjectToShow = await getProjects(slugNext.slug)
 
     .projects {
       grid-template-rows: 700px 900px 700px;
-
-    /* .latest-work .projects {
-      grid-template-columns: 40px 1fr 145px 100px 80px 200px 1fr;
-      grid-template-rows: 500px 280px 65px 245px 205px 290px 80px auto;
-    } */
-    .latest-work .project .image-wrapper {
-      /* height: 100%; */
     }
-
-    /* .project.grid-1 {
-      grid-row-start: 1;
-      grid-row-end: 4;
-      grid-column-start: 1;
-      grid-column-end: 4;
-    }
-
-    .project.grid-2 {
-      grid-row-start: 1;
-      grid-row-end: 2;
-      grid-column-start: 6;
-      grid-column-end: 8;
-    }
-
-    .project.grid-3 {
-      grid-row-start: 5;
-      grid-row-end: 7;
-      grid-column-start: 2;
-      grid-column-end: 4;
-    }
-    .project.grid-4 {
-      grid-row-start: 3;
-      grid-row-end: 6;
-      grid-column-start: 5;
-      grid-column-end: 7;
-    } */
   }
 </style>
