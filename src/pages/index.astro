@@ -348,14 +348,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     height: auto;
     z-index: -1;
   }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  /* //////////7 */
 
   .hero .overlap {
     display: flex;
@@ -674,7 +666,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .latest-work .projects {
     display: grid;
     grid-template-areas: "item";
-    gap: 12rem;
+    gap: 6rem;
     margin-top: 4rem;
     width: 100%;
   }
@@ -804,6 +796,13 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: var(--text-default-font-family);
+    font-weight: var(--text-default-font-weight);
+    color: var(--textdefault);
+    font-size: var(--text-default-font-size);
+    letter-spacing: var(--text-default-letter-spacing);
+    line-height: var(--text-default-line-height);
+    font-style: var(--text-default-font-style);
   }
 
   .clients .subnav .line {
@@ -1158,6 +1157,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       text-align: initial;
       position: absolute;
       top: 160px;
+      left: 0;
     }
     .services {
       gap: 8rem;
@@ -1175,6 +1175,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
         "item1 item1 item2"
         "item3 item4 item4";
     }
+
     .project.grid-1 {
       grid-area: item1;
     }
@@ -1250,6 +1251,10 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     .latest-work .title {
       display: flex;
       gap: 0.5rem;
+    }
+
+    .latest-work .projects {
+      gap: 12rem;
     }
 
     .clients {
