@@ -6,6 +6,7 @@
   <div class="cta">
     <div class="cta-button">
       <div class="overlap-group">
+        <div class="layer-hidden-button-b"></div>
         <div class="circle">
           <div class="get-in-touch">PONTE EN CONTACTO</div>
         </div>
@@ -44,6 +45,32 @@
   </footer>
 </section>
 
+<script>
+  // @ts-nocheck
+  import { handleMouseMoveAnimation } from "../utils/handleMouseMoveAnimation.js";
+  const animateButtonBottom = document.querySelector(".layer-hidden-button-b");
+  const button = document.querySelector(".bottom .circle");
+  const border = document.querySelector(".overlap-group .border");
+
+  animateButtonBottom.addEventListener("mousemove", function (e) {
+    e.preventDefault();
+    handleMouseMoveAnimation(animateButtonBottom, button, border, e);
+  });
+
+  animateButtonBottom.addEventListener("mouseleave", function (e) {
+    e.preventDefault();
+
+    gsap.to(button, {
+      x: 0,
+      y: 0,
+    });
+    gsap.to(border, {
+      x: 0,
+      y: 0,
+    });
+  });
+</script>
+
 <style>
   .bottom {
     margin-top: 14rem;
@@ -68,6 +95,16 @@
     width: 230px;
     height: 220px;
     left: -10px;
+  }
+
+  .layer-hidden-button-b {
+    /* border: 1px solid red; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 230px;
+    z-index: 40;
   }
   .bottom .circle {
     display: flex;

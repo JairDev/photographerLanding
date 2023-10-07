@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { PortableText } from "astro-portabletext";
 import { useSanityClient } from "@sanity/astro";
+import { handleMouseMoveAnimation } from "../utils/handleMouseMoveAnimation.js";
 
 const client = useSanityClient();
 const projects = await client.fetch(`*[_type == "projects"]{
@@ -67,6 +68,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
           </div>
           <div class="button">
             <div class="overlap-group-2">
+              <div class="layer-hidden-button"></div>
               <div class="circle">
                 <div class="work-with-me">TRABAJA<br />CONMIGO</div>
               </div>
@@ -210,6 +212,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
 <script>
   // @ts-nocheck
+  import { handleMouseMoveAnimation } from "../utils/handleMouseMoveAnimation.js";
   gsap.registerPlugin(ScrollTrigger);
   const service = document.querySelectorAll(".row");
   const titles = document.querySelectorAll(".title.hidden");
@@ -217,6 +220,27 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   const layers = gsap.utils.toArray(".layer-project");
   const viewProject = document.querySelectorAll(".view-project");
   const layerProject = document.querySelectorAll(".layer-project-hidden");
+  const animateButtonTop = document.querySelector(".layer-hidden-button");
+  const button = document.querySelector(".circle");
+  const border = document.querySelector(".overlap-group-2 .border");
+
+  animateButtonTop.addEventListener("mousemove", function (e) {
+    e.preventDefault();
+    handleMouseMoveAnimation(animateButtonTop, button, border, e);
+  });
+
+  animateButtonTop.addEventListener("mouseleave", function (e) {
+    e.preventDefault();
+
+    gsap.to(button, {
+      x: 0,
+      y: 0,
+    });
+    gsap.to(border, {
+      x: 0,
+      y: 0,
+    });
+  });
 
   layerProject.forEach((layer, i) => {
     layer.addEventListener("mousemove", function (e) {
@@ -492,11 +516,19 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .hero .button {
     align-self: flex-end;
     position: absolute;
-    bottom: -20px;
   }
 
   .hero .overlap-group-2 {
     position: relative;
+  }
+
+  .layer-hidden-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 180px;
+    z-index: 40;
   }
 
   .hero .circle {
@@ -506,7 +538,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     height: 140px;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    /* position: absolute; */
     top: 9px;
     left: 0;
     background-color: var(--backgroundprimary);
@@ -526,13 +558,14 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .hero .border {
-    width: 160px;
-    height: 160px;
-    top: 0;
-    left: 10px;
     border-radius: 80.06px/80px;
     border: 1px solid;
     border-color: var(--borderprimary);
+    position: absolute;
+    top: 0;
+    left: 10px;
+    width: 160px;
+    height: 160px;
   }
 
   /* services */
