@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import sanity from "@sanity/astro";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
+import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,4 +23,5 @@ export default defineConfig({
   image: {
     domains: ["cdn.sanity.io"],
   },
+  adapter: netlify(),
 });
