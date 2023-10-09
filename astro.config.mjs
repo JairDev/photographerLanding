@@ -15,6 +15,7 @@ export default defineConfig({
       apiVersion: "2023-09-26",
       studioBasePath: "/admin",
       plugins: [deskTool(), visionTool()],
+      useCdn: false,
     }),
     react(),
   ],
