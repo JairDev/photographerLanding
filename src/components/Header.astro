@@ -56,7 +56,6 @@
   <!-- </div> -->
 
   <script>
-    // gsap.registerPlugin(ScrollTrigger);
     const tl = gsap.timeline({ paused: true });
     function openNav() {
       animateOpenNav();
@@ -238,14 +237,15 @@
     }
 
     .menu .menu-toggle {
+      border-radius: 100px;
+      border: 1px solid;
+      border-color: var(--borderprimary);
+      cursor: pointer;
       position: absolute;
       width: 200px;
       height: 200px;
       top: -50px;
       right: -50px;
-      border-radius: 100px;
-      border: 1px solid;
-      border-color: var(--borderprimary);
     }
     .menu-off {
       position: absolute;
