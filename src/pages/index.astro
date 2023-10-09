@@ -31,6 +31,9 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   "avatar": avatar.asset->url,
   "alt": avatar.alt
 }`);
+
+const smallImage = `${projects[0]?.image}?w=400&h=600`;
+const mediumImage = `${projects[0]?.image}?w=800&h=900`;
 ---
 
 <Layout title="Andrea Fotografía">
@@ -46,12 +49,18 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
             </div>
           </div>
           <div class="image-wrapper">
-            <Image
-              src={projects[0].image}
-              alt={projects[0].alt}
-              width={400}
-              height={600}
-            />
+            <picture>
+              <source srcset={projects[0].image} media="(min-width: 1200px)" />
+              <source srcset={mediumImage} media="(min-width: 768px)" />
+              <img
+                src={smallImage}
+                decoding="async"
+                loading="lazy"
+                alt="hola"
+                width="400"
+                height="600"
+              />
+            </picture>
           </div>
         </div>
         <div class="image">
@@ -376,7 +385,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   .hero .overlap {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     min-height: 100vh;
     position: relative;
   }
@@ -600,8 +608,8 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   .services .row {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
   .row:not(.row:first-child) {
@@ -1178,19 +1186,16 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
   }
 
   /* media */
+
+  @media screen and (min-width: 480px) {
+    .services .row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+    }
+  }
   @media screen and (min-width: 768px) {
     .hero .image-wrapper img {
       opacity: 1;
-    }
-
-    .hero .overlap {
-      flex-direction: row-reverse;
-    }
-    .hero .headline {
-      text-align: initial;
-      position: absolute;
-      top: 160px;
-      left: 0;
     }
     .services {
       gap: 8rem;
@@ -1246,6 +1251,17 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
       height: 900px;
     }
 
+    .hero .overlap-group {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .hero .headline {
+      text-align: initial;
+      position: absolute;
+      top: 160px;
+      left: 0;
+    }
+
     .hero .image {
       position: absolute;
       bottom: -120px;
@@ -1260,11 +1276,6 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
     .services {
       margin-top: 14rem;
       padding-left: 10rem;
-    }
-
-    .services .row {
-      flex-direction: row;
-      gap: 4rem;
     }
 
     .image .div {

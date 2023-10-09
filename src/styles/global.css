@@ -169,19 +169,6 @@ body {
   background-color: var(--backgrounddefault);
 }
 
-/* @font-face {
-  font-family: "ClashDisplay-Regular";
-  src: url("/fonts/ClashDisplay-Regular.woff") format("woff"),
-    url("/fonts/ClashDisplay-Bold.woff") format("woff"),
-    url("/fonts/ClashDisplay-Extralight.woff") format("woff"),
-    url("/fonts/ClashDisplay-Light.woff") format("woff"),
-    url("/fonts/ClashDisplay-Light.woff") format("woff"),
-    url("/fonts/ClashDisplay-Semibold.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-} */
-
 @font-face {
   font-family: "ClashDisplay-Variable";
   src: url("/fonts/ClashDisplay-Variable.woff2") format("woff2"),
