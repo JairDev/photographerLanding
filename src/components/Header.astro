@@ -13,6 +13,7 @@
     <div class="wrapper-header-nav">
       <div class="jacob-gr-nberg"><a href="/">ANDREA MARTINEZ</a></div>
       <div class="menu-toggle">
+        <div class="menu-toggle-border"></div>
         <img class="menu-off" src="/menu_toggle.svg" />
         <div class="overlap-group">
           <div class="line"></div>
@@ -60,33 +61,39 @@
       const defaultMenu = document.querySelector(".menu-off");
       const closeMenu = document.querySelector(".overlap-group");
       const toggleMenu = document.querySelector(".menu-toggle");
+      const menuBorder = document.querySelector(".menu-toggle-border");
 
       toggleMenu.onclick = function (e) {
         tl.reversed(!tl.reversed());
         defaultMenu.classList.toggle("hidden");
         closeMenu.classList.toggle("show");
+        menuBorder.classList.toggle("show");
       };
     }
 
     function animateOpenNav() {
-      const menu = document.querySelector(".wrapper-links");
+      const menu = document.querySelector(".menu");
+      const wrapperLinks = document.querySelector(".wrapper-links");
       const layers = document.querySelectorAll(".layer-menu");
       const links = document.querySelectorAll(".wrapper-hidden");
       const menuBottom = document.querySelectorAll(".menu-bottom");
-      tl.to(menu, {
+      tl.to(wrapperLinks, {
         duration: 0.01,
         yPercent: 100,
       })
         .to(layers, {
+          duration: 0.4,
           yPercent: 100,
           stagger: 0.07,
         })
         .to(links, {
+          duration: 0.4,
           opacity: 1,
           yPercent: -100,
           stagger: 0.07,
         })
         .from(menuBottom, {
+          duration: 0.4,
           opacity: 0,
           yPercent: 30,
         })
@@ -105,8 +112,8 @@
       justify-content: center;
       position: fixed;
       width: 100%;
-      height: 100%;
-      z-index: 10;
+      /* height: 100%; */
+      z-index: 20;
     }
     .content-menu-back-layer {
       display: grid;
@@ -128,6 +135,8 @@
 
     .wrapper-header-nav {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 2rem 0rem;
       position: relative;
       z-index: 20;
@@ -237,35 +246,45 @@
 
     .menu .menu-toggle {
       border-radius: 100px;
-      border: 1px solid;
-      border-color: var(--borderprimary);
       cursor: pointer;
+      position: relative;
+    }
+
+    .menu .menu-toggle-border {
+      border: 1px solid var(--borderprimary);
+      border-radius: 100px;
       position: absolute;
       width: 200px;
       height: 200px;
-      top: -50px;
-      right: -50px;
+      top: -80px;
+      right: -80px;
+      opacity: 0;
+      transition: all 0.4s ease;
     }
+    .menu .menu-toggle-border.show {
+      opacity: 1;
+    }
+
     .menu-off {
-      position: absolute;
       width: 36px;
       height: 36px;
-      top: 82px;
-      left: 82px;
       opacity: 1;
+      transition: all 0.4s ease;
     }
     .menu-off.hidden {
       opacity: 0;
     }
 
     .overlap-group {
-      position: relative;
+      position: absolute;
       width: 36px;
       height: 36px;
-      top: 82px;
-      left: 82px;
+      top: 0;
+      left: 0;
       opacity: 0;
+      transition: all 0.4s ease;
     }
+
     .overlap-group.show {
       opacity: 1;
     }
