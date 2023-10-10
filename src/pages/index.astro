@@ -28,6 +28,7 @@ const services = await client.fetch(`*[_type == "services"]{
 const testimonials = await client.fetch(`*[_type == "testimonials"]{
   name_client,
   testimonial,
+  service,
   "avatar": avatar.asset->url,
   "alt": avatar.alt
 }`);
@@ -183,12 +184,7 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
               <div class="content">
                 <div class="grid-2">
                   <div class="wrapper-comment-avatar">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.alt}
-                      width={80}
-                      height={80}
-                    />
+                    <img src={`${testimonial.avatar}?w=400&h=400`} />
                   </div>
                   <div class="wrapper-content-comment">
                     <div class="wrapper-title-quote">
@@ -201,7 +197,7 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
                           {testimonial.name_client}
                         </div>
                         <div class="line" />
-                        <div class="text-wrapper-4">Photoshoot</div>
+                        <div class="text-wrapper-4"> {testimonial.service}</div>
                       </div>
                     </div>
                   </div>

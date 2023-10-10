@@ -14,6 +14,11 @@ const testimonials = {
       type: "string",
     },
     {
+      name: "service",
+      title: "Service",
+      type: "string",
+    },
+    {
       name: "avatar",
       title: "Avatar",
       type: "image",
