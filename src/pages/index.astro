@@ -35,6 +35,7 @@ const testimonials = await client.fetch(`*[_type == "testimonials"]{
 
 const smallImage = `${projects[0]?.image}?w=400&h=600`;
 const mediumImage = `${projects[0]?.image}?w=800&h=900`;
+const largeImage = `${projects[0]?.image}?w=768&h=1024`;
 ---
 
 <Layout title="Andrea Fotografía">
@@ -51,13 +52,13 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
           </div>
           <div class="image-wrapper">
             <picture>
-              <source srcset={projects[0].image} media="(min-width: 1200px)" />
+              <source srcset={largeImage} media="(min-width: 1200px)" />
               <source srcset={mediumImage} media="(min-width: 768px)" />
               <img
                 src={smallImage}
                 decoding="async"
                 loading="lazy"
-                alt="hola"
+                alt={projects[0].alt}
                 width="400"
                 height="600"
               />
@@ -136,12 +137,22 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
                   <div class="layer-project-hidden" />
                   <span class="view-project">VER PROYECTO </span>
                   <span class="layer-project" />
-                  <Image
-                    src={project.image}
-                    alt={project.alt}
-                    width={400}
-                    height={600}
-                  />
+                  <picture>
+                    <source
+                      srcset={`${project.image}?w=768&h=1024`}
+                      media="(min-width: 1200px)"
+                    />
+                    <source
+                      srcset={`${project.image}?w=700&h=900`}
+                      media="(min-width: 768px)"
+                    />
+                    <img
+                      src={`${project.image}?w=400&h=600`}
+                      width="500"
+                      height="700"
+                      alt={project.alt}
+                    />
+                  </picture>
                 </div>
               </a>
               <div class="wrapper-project-info">
@@ -184,7 +195,12 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
               <div class="content">
                 <div class="grid-2">
                   <div class="wrapper-comment-avatar">
-                    <img src={`${testimonial.avatar}?w=400&h=400`} />
+                    <img
+                      src={`${testimonial.avatar}?w=400&h=400`}
+                      decoding="async"
+                      loading="lazy"
+                      alt={testimonial.alt}
+                    />
                   </div>
                   <div class="wrapper-content-comment">
                     <div class="wrapper-title-quote">
@@ -260,18 +276,6 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
       });
     });
   });
-
-  if (window.innerWidth > 1200) {
-    gsap.to(".clients .grid", {
-      scrollTrigger: {
-        trigger: ".clients .grid",
-        start: "top 20%",
-        end: "bottom 80%",
-        // markers: true,
-        pin: true,
-      },
-    });
-  }
   service.forEach((service) => {
     gsap.from(service, {
       scrollTrigger: {
@@ -332,6 +336,18 @@ const mediumImage = `${projects[0]?.image}?w=800&h=900`;
       ease: "back.out(1.7)",
       duration: 0.6,
     });
+  if (window.innerWidth > 1200) {
+    gsap.to(".clients .grid", {
+      scrollTrigger: {
+        trigger: ".clients .grid",
+        start: "top 20%",
+        end: "bottom 80%",
+        // markers: true,
+        pin: true,
+        invalidateOnRefresh: true,
+      },
+    });
+  }
 </script>
 
 <style>

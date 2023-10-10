@@ -30,6 +30,7 @@ async function getProjects(slug) {
   "slug": slug.current,
   title,
   "image": image.asset->url,
+  "alt": image.alt,
   date,
   description,
   service,
@@ -37,7 +38,7 @@ async function getProjects(slug) {
   gallerys->{
     'images': image[]{
       "url": asset->url,
-      imagename
+      alt
     }
   }
 }`,
@@ -65,6 +66,7 @@ const projectsContent = await getProjects(slug);
 const nextProjectToShow = await getProjects(slugNext.slug);
 const smallImage = `${projectsContent?.image}?w=400&h=600`;
 const mediumImage = `${projectsContent?.image}?w=800&h=900`;
+const largeImage = `${projectsContent?.image}?w=768&h=1024`;
 ---
 
 <Layout title={slug}>
@@ -73,16 +75,13 @@ const mediumImage = `${projectsContent?.image}?w=800&h=900`;
       <div class="grid">
         <div class="image-wrapper">
           <picture>
-            <source
-              srcset={projectsContent?.image}
-              media="(min-width: 1200px)"
-            />
+            <source srcset={largeImage} media="(min-width: 1200px)" />
             <source srcset={mediumImage} media="(min-width: 768px)" />
             <img
               src={smallImage}
               decoding="async"
               loading="lazy"
-              alt="hola"
+              alt={projectsContent.alt}
               width="400"
               height="600"
             />
@@ -137,7 +136,7 @@ const mediumImage = `${projectsContent?.image}?w=800&h=900`;
                     src={`${project.url}?w=400&h=600`}
                     decoding="async"
                     loading="lazy"
-                    alt="hola"
+                    alt={project.alt}
                   />
                 </picture>
               </div>

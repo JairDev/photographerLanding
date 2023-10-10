@@ -19,7 +19,6 @@ const image = {
             hotspot: true,
           },
           fields: [
-            { name: "imagename", title: "Imagenames", type: "string" },
             {
               name: "alt",
               title: "Alt",
