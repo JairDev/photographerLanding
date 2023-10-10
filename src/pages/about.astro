@@ -2,26 +2,35 @@
 import { useSanityClient } from "@sanity/astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
-// export function getStaticPaths() {
-//   return [{ params: { slug: "about" } }];
-// }
 
-// const { slug } = Astro.params;
 const client = useSanityClient();
 const user = await client.fetch(`*[_type == "about"][0]{
   admin_name,
-  "avatar": avatar.asset->url
+  "avatar": avatar.asset->url,
+  "alt": avatar.alt
 }`);
-// console.log(user);
+const smallImage = `${user?.avatar}?w=400&h=600`;
+const mediumImage = `${user?.avatar}?w=800&h=900`;
+const largeImage = `${user?.avatar}?w=768&h=1024`;
 ---
 
-<!-- <h1>{slug}</h1> --><!-- <div>{user.admin_name}</div> -->
 <Layout title="Acerca de">
   <main class="main">
     <div class="hero">
       <div class="overlap-group">
         <div class="image-wrapper">
-          <img src={user.avatar} />
+          <picture>
+            <source srcset={largeImage} media="(min-width: 1200px)" />
+            <source srcset={mediumImage} media="(min-width: 768px)" />
+            <img
+              src={smallImage}
+              decoding="async"
+              loading="lazy"
+              alt={user.alt}
+              width="400"
+              height="600"
+            />
+          </picture>
         </div>
         <div class="wrapper-hero-text">
           <h1 class="about-hero">ACERCA DE</h1>
