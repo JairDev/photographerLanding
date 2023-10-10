@@ -9,7 +9,6 @@
     <span class="layer-menu"></span>
     <span class="layer-menu"></span>
   </div>
-  <!-- <div class="div"> -->
   <nav class="menu-nav">
     <div class="wrapper-header-nav">
       <div class="jacob-gr-nberg"><a href="/">ANDREA MARTINEZ</a></div>
@@ -45,15 +44,14 @@
         </li>
       </ul>
       <div class="menu-bottom">
-        <!-- <div class="column-2">
-            <div class="text-wrapper-4">TWITTER</div>
-            <div class="text-wrapper-4">INSTAGRAM</div>
-            <div class="text-wrapper-4">FACEBOOK</div>
-          </div> -->
+        <div class="column-2">
+          <div class="text-wrapper-4">TWITTER</div>
+          <div class="text-wrapper-4">INSTAGRAM</div>
+          <div class="text-wrapper-4">FACEBOOK</div>
+        </div>
       </div>
     </div>
   </nav>
-  <!-- </div> -->
 
   <script>
     const tl = gsap.timeline({ paused: true });
@@ -74,6 +72,7 @@
       const menu = document.querySelector(".wrapper-links");
       const layers = document.querySelectorAll(".layer-menu");
       const links = document.querySelectorAll(".wrapper-hidden");
+      const menuBottom = document.querySelectorAll(".menu-bottom");
       tl.to(menu, {
         duration: 0.01,
         yPercent: 100,
@@ -87,6 +86,10 @@
           yPercent: -100,
           stagger: 0.07,
         })
+        .from(menuBottom, {
+          opacity: 0,
+          yPercent: 30,
+        })
         .reverse();
     }
     openNav();
@@ -97,13 +100,12 @@
       text-decoration: none;
     }
     .menu {
-      /* background-color: var(--backgrounddefault); */
       display: flex;
       flex-direction: row;
       justify-content: center;
       position: fixed;
       width: 100%;
-      /* min-height: 100vh; */
+      height: 100%;
       z-index: 10;
     }
     .content-menu-back-layer {
@@ -159,30 +161,29 @@
     }
 
     .wrapper-links {
-      /* transform: scale(0); */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       position: absolute;
       top: 0;
       left: 0;
       padding-top: 6rem;
       width: 100%;
+      height: 100vh;
       transform: translateY(-100%);
     }
 
     .menu .div-2 {
-      /* border: 1px solid red; */
       display: inline-flex;
       flex-direction: column;
       align-items: center;
       gap: 40px;
       width: 100%;
       padding-top: 2rem;
-      /* opacity: 0; */
-      /* display: none; */
       z-index: 0;
     }
 
     .menu .menu-item {
-      /* border: 1px solid red; */
       position: relative;
       overflow: hidden;
     }
@@ -210,7 +211,6 @@
 
     .menu .text-wrapper-2 {
       position: relative;
-      /* width: fit-content; */
       margin-top: -1px;
       font-family: var(--heading-uppercase-large-font-family);
       font-weight: var(--heading-uppercase-large-font-weight);
@@ -224,7 +224,6 @@
 
     .menu .exhibitions {
       position: relative;
-      /* width: fit-content; */
       margin-top: -1px;
       font-family: var(--heading-uppercase-large-font-family);
       font-weight: var(--heading-uppercase-large-font-weight);
@@ -293,10 +292,9 @@
 
     .menu .menu-bottom {
       display: flex;
-      /* width: 1600px; */
       align-items: center;
       justify-content: space-between;
-      padding: 4rem 0rem 2rem;
+      padding: 4rem 2rem 2rem;
       z-index: 0;
     }
 
