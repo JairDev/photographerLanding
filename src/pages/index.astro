@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { PortableText } from "astro-portabletext";
 import { useSanityClient } from "@sanity/astro";
-import { handleMouseMoveAnimation } from "../utils/handleMouseMoveAnimation.js";
 
 const client = useSanityClient();
 const projects = await client.fetch(`*[_type == "projects"]{
@@ -89,9 +88,9 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
         </div>
       </div>
       <div class="scroll-down">
-        <img class="arrow" src="img/arrow.svg" />
+        <img class="arrow" src="arrow.svg" />
         <div class="scroll-down-explore">
-          Scroll Down<br />&amp; Explore
+          Scroll Down<br />&amp; Explorar
         </div>
       </div>
     </section>
@@ -390,6 +389,9 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
     height: auto;
     z-index: -1;
   }
+  .hero {
+    position: relative;
+  }
 
   .hero .overlap {
     display: flex;
@@ -405,8 +407,10 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
 
   .hero .scroll-down {
     display: none;
-    top: 842px;
-    left: 1168px;
+    position: absolute;
+    bottom: -70px;
+    right: 0;
+    z-index: 60;
   }
 
   .hero .arrow {
@@ -793,6 +797,7 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
     letter-spacing: var(--text-default-letter-spacing);
     line-height: var(--text-default-line-height);
     font-style: var(--text-default-font-style);
+    margin-top: 0.5rem;
   }
 
   /* clients */
@@ -1205,6 +1210,9 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
   @media screen and (min-width: 768px) {
     .hero .image-wrapper img {
       opacity: 1;
+    }
+    .hero .scroll-down {
+      display: block;
     }
     .services {
       gap: 8rem;
