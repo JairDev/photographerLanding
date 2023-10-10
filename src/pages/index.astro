@@ -537,6 +537,7 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
   .hero .button {
     align-self: flex-end;
     position: absolute;
+    z-index: 40;
   }
 
   .hero .overlap-group-2 {
@@ -903,6 +904,7 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
   }
 
   .clients .button {
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -913,6 +915,7 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
     border: 1px solid var(--borderprimary);
     margin-top: 3rem;
   }
+
   .clients .button .default {
     position: relative;
     width: fit-content;
