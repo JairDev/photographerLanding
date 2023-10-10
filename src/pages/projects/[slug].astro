@@ -67,7 +67,6 @@ const nextProjectToShow = await getProjects(slugNext.slug);
 const smallImage = `${projectsContent?.image}?w=400&h=600`;
 const mediumImage = `${projectsContent?.image}?w=800&h=900`;
 const largeImage = `${projectsContent?.image}?w=768&h=1024`;
-console.log(nextProjectToShow.slug);
 ---
 
 <Layout title={slug}>
@@ -138,6 +137,8 @@ console.log(nextProjectToShow.slug);
                     decoding="async"
                     loading="lazy"
                     alt={project.alt}
+                    width="768"
+                    height="1024"
                   />
                 </picture>
               </div>
