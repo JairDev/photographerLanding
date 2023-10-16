@@ -258,23 +258,25 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
       y: 0,
     });
   });
+  if (window.innerWidth >= 1200) {
+    layerProject.forEach((layer, i) => {
+      layer.addEventListener("mousemove", function (e) {
+        const width = viewProject[i].getBoundingClientRect().width / 2;
+        const height = viewProject[i].getBoundingClientRect().height / 2;
+        gsap.to(viewProject[i], {
+          x: `${e.offsetX - width}`,
+          y: `${e.offsetY - height}`,
+          opacity: 1,
+        });
+      });
+      layer.addEventListener("mouseleave", function (e) {
+        gsap.to(viewProject[i], {
+          opacity: 0,
+        });
+      });
+    });
+  }
 
-  layerProject.forEach((layer, i) => {
-    layer.addEventListener("mousemove", function (e) {
-      const width = viewProject[i].getBoundingClientRect().width / 2;
-      const height = viewProject[i].getBoundingClientRect().height / 2;
-      gsap.to(viewProject[i], {
-        x: `${e.offsetX - width}`,
-        y: `${e.offsetY - height}`,
-        opacity: 1,
-      });
-    });
-    layer.addEventListener("mouseleave", function (e) {
-      gsap.to(viewProject[i], {
-        opacity: 0,
-      });
-    });
-  });
   service.forEach((service) => {
     gsap.from(service, {
       scrollTrigger: {
@@ -431,6 +433,8 @@ const largeImage = `${projects[0]?.image}?w=768&h=1024`;
   }
 
   .hero .image-wrapper {
+    height: 900px;
+    max-height: 900px;
     padding-top: 2rem;
     z-index: 1;
   }
