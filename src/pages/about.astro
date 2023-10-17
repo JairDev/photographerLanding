@@ -2,11 +2,13 @@
 import { useSanityClient } from "@sanity/astro";
 import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
+import { PortableText } from "astro-portabletext";
 
 const client = useSanityClient();
 const user = await client.fetch(`*[_type == "about"][0]{
   admin_name,
   "avatar": avatar.asset->url,
+  description,
   "alt": avatar.alt
 }`);
 const smallImage = `${user?.avatar}?w=400&h=600`;
@@ -45,7 +47,7 @@ const largeImage = `${user?.avatar}?w=768&h=1024`;
     <div class="about">
       <div class="grid">
         <h2 class="text-wrapper">ACERCA DE</h2>
-        <p class="massa-vitae-tortor">
+        <!-- <p class="massa-vitae-tortor">
           Massa vitae tortor condimentum lacinia quis vel eros donec. In
           fermentum et sollicitudin ac orci phasellus egestas tellus
           rutrum.&nbsp;&nbsp;Congue nisi vitae suscipit tellus mauris a diam
@@ -57,7 +59,10 @@ const largeImage = `${user?.avatar}?w=768&h=1024`;
           et malesuada. Eget nullam non nisi est sit amet facilisis magna etiam.
           Et tortor at risus viverra adipiscing at in tellus integer. Mi sit
           amet mauris commodo quis imperdiet massa.
-        </p>
+        </p> -->
+        <div class="massa-vitae-tortor">
+          <PortableText value={user.description} />
+        </div>
       </div>
       <div class="grid">
         <h2 class="text-wrapper">RECONOCIMIENTOS</h2>
